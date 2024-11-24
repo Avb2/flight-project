@@ -1,9 +1,13 @@
 org/com/database/parser/ResultSetParser.class
 org/com/models/RegistrationAdmin.class
-org/com/bases/Models.class
 org/com/state/database/Pool.class
 org/com/bases/Database.class
 org/com/env/Environment.class
+org/com/bases/Screen.class
+org/com/bases/Panes.class
+org/com/bases/Models.class
 org/com/database/UserDatabase.class
 org/com/state/user/UserState.class
+org/com/bases/Component.class
+org/com/constants/Sizes.class
 org/com/App.class
