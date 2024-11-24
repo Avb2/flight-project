@@ -20,7 +20,7 @@ public abstract class Database {
     }
 
     // Query the database and return info
-    public ResultSet query(String query){
+    protected ResultSet query(String query){
         ResultSet result = null;
         
         try{
@@ -34,9 +34,9 @@ public abstract class Database {
         }
         return result;
     }
-    
+
     // Query the db
-    public ResultSet query(String query, String[] args){
+    protected ResultSet query(String query, String[] args){
         // Initialize statement
         PreparedStatement statement = null;
 
@@ -68,7 +68,7 @@ public abstract class Database {
     }
 
     // Query the db
-    public ResultSet query(String query, Object[] args, Object[] types){
+    protected ResultSet query(String query, Object[] args, Object[] types){
         // Initialize statement
         PreparedStatement statement = null;
 
@@ -114,47 +114,47 @@ public abstract class Database {
     }
 
 
-      // Update db
-      public void updateQuery(String query, Object[] args, Object[] types){
-        System.out.println(args.length);
-        // Initialize statement
-        PreparedStatement statement = null;
+    // Update db
+    protected void updateQuery(String query, Object[] args, Object[] types){
+    System.out.println(args.length);
+    // Initialize statement
+    PreparedStatement statement = null;
 
-        // Create statement
+    // Create statement
+    try {
+        statement =  this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }  
+
+    for (int i = 0; i < args.length; i++){
         try {
-            statement =  this.connection.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }  
-
-        for (int i = 0; i < args.length; i++){
-            try {
-                if (types[i] instanceof Integer) {
-                    statement.setInt(i + 1, (Integer) (args[i]));
-                } else if (types[i] instanceof String) {
-                    statement.setString(i + 1, (String) (args[i]));
-                } else if (types[i] instanceof Double) {
-                    statement.setDouble(i + 1, (Double) (args[i]));
-                
-                } else if (types[i] instanceof Date) {
-                    statement.setDate(i + 1, (Date)(args[i]));
-                } else if (types[i] instanceof Time) {
-                    statement.setTime(i + 1, (Time)(args[i]));
-                } else if (types[i] instanceof Timestamp) {
-                    statement.setTimestamp (i + 1, (Timestamp)(args[i]));
-                }
-            } catch (SQLException e) {
+            if (types[i] instanceof Integer) {
+                statement.setInt(i + 1, (Integer) (args[i]));
+            } else if (types[i] instanceof String) {
+                statement.setString(i + 1, (String) (args[i]));
+            } else if (types[i] instanceof Double) {
+                statement.setDouble(i + 1, (Double) (args[i]));
+            
+            } else if (types[i] instanceof Date) {
+                statement.setDate(i + 1, (Date)(args[i]));
+            } else if (types[i] instanceof Time) {
+                statement.setTime(i + 1, (Time)(args[i]));
+            } else if (types[i] instanceof Timestamp) {
+                statement.setTimestamp (i + 1, (Timestamp)(args[i]));
             }
-        }
-
-        // Update result from the db
-        try {
-            statement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
         }
-
     }
+
+    // Update result from the db
+    try {
+        statement.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+}
 
 
 }
