@@ -1,3 +1,9 @@
-org/com/env/Environment.class
+org/com/database/parser/ResultSetParser.class
+org/com/models/RegistrationAdmin.class
+org/com/bases/Models.class
 org/com/state/database/Pool.class
+org/com/bases/Database.class
+org/com/env/Environment.class
+org/com/database/UserDatabase.class
+org/com/state/user/UserState.class
 org/com/App.class
