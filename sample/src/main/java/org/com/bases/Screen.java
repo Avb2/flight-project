@@ -8,17 +8,23 @@ import org.com.constants.Sizes;
 
 public abstract class Screen {
 
-    public abstract GridPane createPane(Stage stage);
-
 
     public Scene createScreen(Stage stage){
-        Scene scene = new Scene(this.createPane(stage), Sizes.primaryHeight, Sizes.primaryWidth);
+        GridPane pane = this.createPane(stage);
+        Scene scene =  new Scene(pane, Sizes.primaryHeight, Sizes.primaryWidth);
         scene.getStylesheets().add(getClass().getResource("/org/com/style.css").toExternalForm());
-
         return scene;
     }
 
+    public abstract GridPane createPane(Stage stage);
 
-   
+
+    public void createPane(GridPane mainPane, Stage stage){
+        // Clear the current pane;
+        mainPane.getChildren().clear();
+
+        mainPane.add(this.createPane(stage), 0, 0);
+
+
+    }
 }
-
