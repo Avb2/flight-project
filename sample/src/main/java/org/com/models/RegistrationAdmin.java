@@ -1,7 +1,5 @@
 package org.com.models;
 
-
-
 import java.sql.Connection;
 
 import org.com.bases.Models;
