@@ -15,6 +15,7 @@ import javafx.scene.Node;
 
 import java.sql.Connection;
 
+import org.com.components.buttons.LogOutButton;
 import org.com.components.buttons.StyledButton1;
 
 
@@ -42,14 +43,11 @@ public class NavBar extends Component{
 
         
 
-        pane.add(
-            new StyledButton1("Main Menu", e -> {
-                
-            }), 0, 0);
+        pane.add(new StyledButton1("Main Menu", e -> {}).createComponent(), 0, 0);
         
         pane.add(new ManageFlightsButton(this.connection, this.stage, this.userState, this.mainPane).createComponent(), 1, 0);
         
-        pane.add(LogOutButton.LogOutButton(this.connection, this.stage, this.userState, this.mainPane), 2, 0);
+        pane.add(LogOutButton.logOutButton(this.connection, this.stage, this.userState, this.mainPane), 2, 0);
 
         return pane;
 

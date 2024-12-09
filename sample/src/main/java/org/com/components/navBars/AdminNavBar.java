@@ -1,20 +1,19 @@
 package org.com.components.navBars;
 
 
+import java.sql.Connection;
+
 import org.com.bases.Component;
 import org.com.components.buttons.LogOutButton;
 import org.com.components.buttons.MainMenuButton;
 import org.com.components.buttons.ManageAdminsBtn;
+import org.com.components.buttons.StyledButton1;
+import org.com.functionality.navigation.PushEditFlight;
 import org.com.state.user.UserState;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import javafx.geometry.Pos;
-
-import java.sql.Connection;
-
-import org.com.components.buttons.StyledButton1;
 
 public class AdminNavBar extends Component{
     private final Stage stage;

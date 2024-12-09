@@ -2,35 +2,29 @@ package org.com.screens.flights;
 
 
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Map;
 
-import javax.xml.transform.Result;
-import java.sql.Timestamp;
 import org.com.bases.Screen;
-import org.com.components.navbars.AuthenticatedNavBar;
-import org.com.state.UserState;
-import org.com.db.FlightDatabase;
 import org.com.components.cards.FlightCard;
-import org.com.db.parser.ResultSetParser;
+import org.com.components.navBars.NavBar;
 import org.com.constants.Sizes;
+import org.com.database.BookingDatabase;
+import org.com.database.FlightDatabase;
+import org.com.database.parser.ResultSetParser;
+import org.com.state.user.UserState;
 
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.geometry.Insets;
-
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.geometry.Pos;
-
-import org.com.db.BookingDatabase;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import org.com.db.parser.ResultSetParser;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 
@@ -51,7 +45,7 @@ public class ManageFlights extends Screen{
         pane.setPadding(new Insets(10,10,10,10));
         pane.setAlignment(Pos.TOP_CENTER);
         pane.setVgap(Sizes.largeGap);
-        pane.add(new AuthenticatedNavBar(this.connection, stage, this.userState, pane).createComponent(), 0, 0);
+        pane.add(new NavBar(this.connection, stage, this.userState, pane).createComponent(), 0, 0);
 
 
         Label titleLabel = new Label("Manage flights");
