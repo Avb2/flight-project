@@ -7,6 +7,7 @@
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/models/RegistrationAdmin.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/screens/home/AuthenticatedUserHomeScreen.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/components/navBars/NavBar.java
+/Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/animations/Animate.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/state/database/Pool.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/screens/home/AdminHomeScreen.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/database/parser/ResultSetParser.java

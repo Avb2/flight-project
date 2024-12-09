@@ -3,9 +3,11 @@ package org.com;
 
 import java.sql.Connection;
 
+import org.com.screens.landing.SplashScreen;
 import org.com.state.database.Pool;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -16,19 +18,20 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        // Db pool
+        // Create connection to db
         Pool pool = new Pool();
-        // Pass this connection around app for database connectivity
         Connection connection = pool.returnConnection();
-
-        
         if (connection != null){
-            // Push splash Screen will go here
+
+            Scene scene = new SplashScreen(connection).createScreen(stage);
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            stage.setScene(scene);
             stage.show();
         } else {
-            System.out.println("Error with database connection");
+            System.out.println("Error connecting to Azure DB");
         }
     }
+
 
     public static void main(String[] args) {
         launch();
