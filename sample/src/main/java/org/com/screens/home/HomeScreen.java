@@ -79,7 +79,7 @@ public class HomeScreen extends Screen{
         // Create flight cards
 
         // Get all flights
-        String[] keys = new String[] {"number", "destination", "status"};
+        String[] keys = new String[] {"number","takeoff", "destination", "status"};
 
     
         try{
@@ -90,7 +90,7 @@ public class HomeScreen extends Screen{
             if (flightData[i] != null) {
                 final int index = i;
                 GridPane tempPane = new GridPane();
-                Node flightCard = new FlightCard(flightData[i].get(keys[0]), flightData[i].get(keys[1]), flightData[i].get(keys[2])).createComponent();
+                Node flightCard = new FlightCard(flightData[i].get(keys[0]), flightData[i].get(keys[1]), flightData[i].get(keys[2]), flightData[i].get(keys[3])).createComponent();
                 tempPane.add(flightCard, 0, 0, 1, 2);
 
             

@@ -64,7 +64,7 @@ public class ManageFlights extends Screen{
 
         // TODO move this elsewhere, business logic
         // Get all flights
-        String[] keys = new String[] {"number", "destination", "status"};
+        String[] keys = new String[] {"number", "departureLocation", "destination", "status"};
 
     
         try{
@@ -74,7 +74,7 @@ public class ManageFlights extends Screen{
         for (int i = 0; i < flightData.length; i++){
             if (flightData[i] != null) {
             GridPane tempPane = new GridPane();
-            Node flightCard = new FlightCard(flightData[i].get(keys[0]), flightData[i].get(keys[1]), flightData[i].get(keys[2])).createComponent();
+            Node flightCard = new FlightCard(flightData[i].get(keys[0]), flightData[i].get(keys[1]), flightData[i].get(keys[2]), flightData[i].get(keys[3])).createComponent();
             tempPane.add(flightCard, 0, 0, 1, 2);
 
 

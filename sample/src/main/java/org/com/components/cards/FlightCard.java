@@ -17,11 +17,13 @@ import javafx.scene.paint.Color;
 
 public class FlightCard extends Component{
     private String number;
+    private String departureLocation;
     private String destination;
     private String status;
 
-    public FlightCard(String number, String destination, String status){
+    public FlightCard(String number, String departureLocation, String destination, String status){
         this.number = number;
+        this.departureLocation = departureLocation;
         this.destination = destination;
         this.status = status;
     }
@@ -43,7 +45,7 @@ public class FlightCard extends Component{
         Label flightStatus = new Label(this.status);
         pane.add(flightStatus, 6, 0);
 
-        Label departureLocationLabel = new Label("");
+        Label departureLocationLabel = new Label(this.departureLocation);
         pane.add(departureLocationLabel, 0, 1);
 
 
