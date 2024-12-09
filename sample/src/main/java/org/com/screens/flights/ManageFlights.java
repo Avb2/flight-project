@@ -121,10 +121,13 @@ public class ManageFlights extends Screen{
                     // Default conflict value set to false
                     boolean conflict = false;
 
+                    System.out.format("%d is the length%n", bookedTimesDict.length);
+
                     // If bookings for the user exist check for conflicts
                     if ( bookedTimesDict != null) {
                           // Compare booking times with time of selected flights for time conflicts 
                           for (Map<String, Object> times: bookedTimesDict) {
+            
                             // Get the takeoff and landing time of the indexed flight booking
                             Timestamp existingTakeoff = (Timestamp) (times.get("takeoff"));
                             Timestamp existingLanding = (Timestamp) (times.get("landing"));
@@ -148,9 +151,11 @@ public class ManageFlights extends Screen{
                     if (conflict == false){
                         try {
                           // Add flight if no conflicts
-                            bookingDb.createBooking(this.userState.getUid(), flightNumber);   
+                            bookingDb.createBooking(this.userState.getUid(), flightNumber);
+                            System.out.println("Added flight");
                         } catch (SQLException se) {
                             se.printStackTrace();
+                            System.out.println("COuldnt Added flight");
                         }
                         
                     } else {

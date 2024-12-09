@@ -1,15 +1,15 @@
 package org.com.database;
 
 
-import org.com.database.parser.ResultSetParser;
-import java.util.Map;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Map;
 
 import org.com.bases.Database;
-import java.sql.Connection;
+import org.com.database.parser.ResultSetParser;
 import org.com.models.RegistrationAdmin;
-import java.sql.Timestamp;
 
 
 
@@ -94,10 +94,7 @@ public class UserDatabase extends Database{
         // Count rows in Result set
         int count = parser.countResult(rs);
         // If there is exactly one matched instance, authenticate the user
-        if (count == 1){
-            return true;
-        }
-        return false;
+        return count == 1;
         
     }
 
@@ -132,10 +129,7 @@ public class UserDatabase extends Database{
         String[] keys = new String[]{"type"};
         Map<String, String> typeDict = new ResultSetParser(rs).parseToStringDict(keys)[0];
 
-        if (typeDict.get(keys[0]).matches("admin")){
-            return true;
-        } 
-        return false;
+        return typeDict.get(keys[0]).matches("admin");
 
     }
 

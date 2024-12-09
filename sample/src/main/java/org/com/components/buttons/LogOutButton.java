@@ -17,7 +17,8 @@ public class LogOutButton {
         button.setOnAction(e -> {
             userState.setName("", "");
             userState.setLoggedInState();
-            new SplashScreen(connection).createPane(stage);
+            stage.setScene(new SplashScreen(connection).createScreen(stage));
+            stage.show();
         });
 
         return button;

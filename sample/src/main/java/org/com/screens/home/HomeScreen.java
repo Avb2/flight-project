@@ -78,15 +78,14 @@ public class HomeScreen extends Screen{
 
         // Create flight cards
 
-           // TODO move this elsewhere, business logic
         // Get all flights
         String[] keys = new String[] {"number", "destination", "status"};
 
     
         try{
+            System.out.println(userState.getUid());
             Map<String, String>[] flightData = new ResultSetParser(new BookingDatabase(this.connection).retrieveBookingByUser(userState.getUid())).parseToStringDict(keys);
                
-
         for (int i = 0; i < flightData.length; i++){
             if (flightData[i] != null) {
                 final int index = i;

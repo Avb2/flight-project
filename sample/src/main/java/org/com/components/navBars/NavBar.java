@@ -1,22 +1,20 @@
 package org.com.components.navBars;
 
 
-import org.com.constants.Sizes;
-import org.com.state.user.UserState;
-import org.com.bases.Component;
-
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-
-import javafx.scene.Node; 
-
 import java.sql.Connection;
 
+import org.com.bases.Component;
 import org.com.components.buttons.LogOutButton;
+import org.com.components.buttons.MainMenuButton;
 import org.com.components.buttons.StyledButton1;
+import org.com.screens.flights.ManageFlights;
+import org.com.state.user.UserState;
+
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 
@@ -43,9 +41,14 @@ public class NavBar extends Component{
 
         
 
-        pane.add(new StyledButton1("Main Menu", e -> {}).createComponent(), 0, 0);
+        pane.add( MainMenuButton.mainMenuButton(connection, stage, userState, pane), 0, 0);
         
-        pane.add(new ManageFlightsButton(this.connection, this.stage, this.userState, this.mainPane).createComponent(), 1, 0);
+        pane.add(new StyledButton1("Manage Flights", e -> {
+            Scene scene = new ManageFlights(this.connection, this.userState).createScreen(this.stage);
+            stage.setScene(scene);
+            stage.show();
+        
+        }).createComponent(), 1, 0);
         
         pane.add(LogOutButton.logOutButton(this.connection, this.stage, this.userState, this.mainPane), 2, 0);
 
