@@ -1,14 +1,14 @@
 package org.com.functionality.auth;
 
-
+//import sql packages
 import java.sql.Connection;
 import java.sql.SQLException;
-
+//import internal packages
 import org.com.database.UserDatabase;
 import org.com.screens.home.AdminHomeScreen;
 import org.com.screens.home.HomeScreen;
 import org.com.state.user.UserState;
-
+//import javafx
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -48,7 +48,7 @@ public class Login {
                         stage.show();
                     }
 
-
+    //write in a way to let back end know that user authentication failed
                     
                 } else {
                     System.out.println("Failed to validate user");
