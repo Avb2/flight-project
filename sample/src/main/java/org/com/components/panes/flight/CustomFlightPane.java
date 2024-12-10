@@ -1,12 +1,13 @@
-package org.com.components.panes;
+package org.com.components.panes.flight;
+
 
 import java.sql.Connection;
 
-import org.com.bases.Component;
+import org.com.bases.Panes;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
+import org.com.components.navBars.AdminNavBar;
 import org.com.functionality.flights.CreateFlightsInterface;
-import org.com.functionality.navigation.PushEditFlight;
 import org.com.models.Flight;
 import org.com.state.user.UserState;
 
@@ -16,67 +17,65 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class ModifyFlightPane extends Component{
+
+public class CustomFlightPane extends Panes{
     String title;
-    private Connection connection;
-    private UserState userState;
     private Stage stage;
     CreateFlightsInterface onAction;
 
-    public ModifyFlightPane(String title, Connection connection, UserState userState, Stage stage, CreateFlightsInterface onAction){
+    public CustomFlightPane(String title,  Stage stage, CreateFlightsInterface onAction){
         this.title = title;
-        this.connection = connection;
-        this.userState = userState;
         this.stage = stage;
         this.onAction = onAction;
     }
 
 
     @Override
-    public Node createComponent(){
+    public void createPane(GridPane mainPane, UserState userState, Connection connection){
+
+       mainPane.getChildren().clear();
+        
         GridPane pane = new GridPane();
         pane.getStyleClass().add("background-primary");
+        mainPane.add(pane, 0, 0);
+
+        GridPane navbar = new AdminNavBar(stage, userState, connection, mainPane).createComponent();
+        navbar.getStyleClass().add("navbar-primary");
+        pane.add(navbar, 0, 0);
+
+    
 
         Label titleLabel = new Label(title);
         titleLabel.getStyleClass().add("subtitle");
-        pane.add(titleLabel, 0, 0);
+        pane.add(titleLabel, 0, 1);
 
-        Node backBtn = new StyledButton1("Back", e -> {
-            new PushEditFlight().push(this.connection, this.userState, this.stage);
-        }).createComponent();
-        pane.add(backBtn, 0, 1);
-
-        
+       
 
         // destination     
-        GridPane numberField = InputField.inputField("Flight Number");
-        pane.add(numberField, 0, 2);
-
         GridPane destinationField = InputField.inputField("Destination");
-        pane.add(destinationField, 0, 3);
+        pane.add(destinationField, 0, 2);
         //        departure location         
         GridPane departureField = InputField.inputField("Departure Location");
-        pane.add(departureField, 0, 4);
+        pane.add(departureField, 0, 3);
         // capacity 
         GridPane capacityField = InputField.inputField("Capacity");
-        pane.add(capacityField, 0, 5);
+        pane.add(capacityField, 0, 4);
         //          takeoff       
         GridPane takeoffField = InputField.inputField("Takeoff Time");  
-        pane.add(takeoffField, 0, 6);  
+        pane.add(takeoffField, 0, 5);  
         //          landing
         GridPane landingField = InputField.inputField("Landing time");
-        pane.add(landingField, 0, 7);          
+        pane.add(landingField, 0, 6);          
         //    date   
         GridPane dateField = InputField.inputField("Flight Date"); 
-        pane.add(dateField, 0, 8);
+        pane.add(dateField, 0, 7);
         //  status  
         GridPane statusField = InputField.inputField("Current Status");
-        pane.add(statusField, 0, 9);
+        pane.add(statusField, 0, 8);
 
         
         Node enterBtn = new StyledButton1("Enter", e -> {
             // Get strings
-            TextField numberFieldText = (TextField) (numberField.getChildren().get(1));
             TextField destinationFieldText = (TextField) (destinationField.getChildren().get(1));
             TextField departureFieldText = (TextField) (departureField.getChildren().get(1));
             TextField capacityFieldText = (TextField) (capacityField.getChildren().get(1));
@@ -87,7 +86,6 @@ public class ModifyFlightPane extends Component{
 
             // Flight model
             Flight flight = new Flight(
-                Integer.valueOf(numberFieldText.getText()),
                 destinationFieldText.getText(),
                 departureFieldText.getText(),
                 capacityFieldText.getText(),
@@ -96,11 +94,14 @@ public class ModifyFlightPane extends Component{
                 dateFieldFieldText.getText(),
                 statusFieldText.getText()
             );
+
+
             this.onAction.onClick(pane, flight);
         }).createComponent();
-        pane.add(enterBtn, 0, 10);
+        pane.add(enterBtn, 0, 9);
 
-    
-    return pane;
     }
+
+
+   
 }

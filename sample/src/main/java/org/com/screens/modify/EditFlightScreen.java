@@ -10,9 +10,9 @@ import org.com.animations.Animate;
 import org.com.bases.Screen;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.navBars.AdminNavBar;
-import org.com.components.panes.CustomFlightPane;
-import org.com.components.panes.EditFlightPane;
-import org.com.components.panes.ModifyFlightPane;
+import org.com.components.panes.flight.CustomFlightPane;
+import org.com.components.panes.flight.EditFlightPane;
+import org.com.components.panes.flight.ModifyFlightPane;
 import org.com.database.FlightDatabase;
 import org.com.functionality.flights.CreateFlightsInterface;
 import org.com.functionality.flights.ModifyFlightsInterface;
@@ -24,114 +24,95 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+public class EditFlightScreen extends Screen {
+    private final UserState userState;
+    private final Connection connection;
 
-public class EditFlightScreen extends Screen{
-    private UserState userState;
-    private Connection connection;
-
-    public EditFlightScreen(Connection connection, UserState userState){
+    public EditFlightScreen(Connection connection, UserState userState) {
         this.connection = connection;
         this.userState = userState;
     }
 
-    @Override 
-    public GridPane createPane(Stage stage){
+    @Override
+    public GridPane createPane(Stage stage) {
         GridPane pane = new GridPane();
-        pane.add(new AdminNavBar(stage, this.userState, this.connection, pane).createComponent(), 0, 0);
+        pane.setVgap(10);  
+        pane.setHgap(10); 
         pane.setAlignment(Pos.TOP_CENTER);
 
-        // Load pane for action
-        Node addBtn = new StyledButton1("Add", e -> {
+        // Add NavBar
+        GridPane navBar = new AdminNavBar(stage, this.userState, this.connection, pane).createComponent();
+        pane.add(navBar, 0, 0);
+
+        // Add buttons with proper spacing and styles
+        Node addBtn = new StyledButton1("Add Flight", e -> {
             pane.getChildren().clear();
 
             CreateFlightsInterface createFlightsInterface = (gPane, flight) -> {
-
                 try {
-                      // Add data to db 
                     new FlightDatabase(this.connection).addFlight(flight);
-
-                    // Added label
-                    Label addedLabel = new Label("Succesffully added");
-                    gPane.add(addedLabel, 0 , 12);
+                    
+                    Label addedLabel = new Label("Successfully added");
+                    addedLabel.getStyleClass().add("subtitle");  
+                    gPane.add(addedLabel, 0, 12);
                     new Animate(addedLabel).fadeOut(3);
                 } catch (SQLException se) {
                     se.printStackTrace();
                 }
-              
-
             };
-
-            pane.add(new CustomFlightPane("Add Flights", this.connection, this.userState, stage, createFlightsInterface).createComponent(), 0, 1);
+        new CustomFlightPane("Add Flights", stage, createFlightsInterface).createPane(pane, userState, connection);
         }).createComponent();
+        addBtn.getStyleClass().add("button-1");
+
         pane.add(addBtn, 0, 1);
 
-
-        // Load pane for edit 
-        Node editBtn = new StyledButton1("Edit", e -> {
+        Node editBtn = new StyledButton1("Edit Flight", e -> {
             pane.getChildren().clear();
+
             CreateFlightsInterface createFlightsInterface = (gPane, flight) -> {
-                System.out.println(flight.getDepartureLocation());
-                try { 
-                    Timestamp takeoffTimestamp = flight.getTakeoffTime() == ""
-                        ? null 
-                        : Timestamp.valueOf(flight.getTakeoffTime());
-                    Timestamp landingTimestamp = flight.getLandingTime() == ""
-                        ? null 
-                        : Timestamp.valueOf(flight.getLandingTime());
-                    Date flightDate = flight.getFlightDate() == "" 
-                        ? null 
-                        : Date.valueOf(flight.getFlightDate());
+                try {
+                    Timestamp takeoffTimestamp = flight.getTakeoffTime().isEmpty() ? null : Timestamp.valueOf(flight.getTakeoffTime());
+                    Timestamp landingTimestamp = flight.getLandingTime().isEmpty() ? null : Timestamp.valueOf(flight.getLandingTime());
+                    Date flightDate = flight.getFlightDate().isEmpty() ? null : Date.valueOf(flight.getFlightDate());
 
                     flight.cleanFields();
 
-                    System.out.println(flight.getId());
-                    System.out.println(flight.getDestination());
-                    System.out.println(flight.getDepartureLocation());
-                    System.out.println(flight.getCapacity());
-                    System.out.println(takeoffTimestamp);
-                    System.out.println(landingTimestamp);
-                    System.out.println(flight.getFlightDate());
-                    System.out.println(flight.getStatus());
-        
-                    // Add data to db
                     new FlightDatabase(this.connection).updateFlight(
                         flight.getId(),
                         flight.getDestination(),
                         flight.getDepartureLocation(),
-                        "".equals(flight.getCapacity()) ? Integer.valueOf(flight.getCapacity()) : null,
+                        flight.getCapacity().isEmpty() ? null : Integer.valueOf(flight.getCapacity()),
                         takeoffTimestamp,
                         landingTimestamp,
                         flightDate,
                         flight.getStatus()
                     );
-        
-                    // Success label
+
                     Label addedLabel = new Label("Successfully modified");
+                    addedLabel.getStyleClass().add("subtitle");  
                     gPane.add(addedLabel, 0, 13);
                     new Animate(addedLabel).fadeOut(3);
                 } catch (SQLException se) {
                     se.printStackTrace();
-        
-                    // Failure label
                     Label errorLabel = new Label("Failed to modify flight");
+                    errorLabel.getStyleClass().add("subtitle");  
                     gPane.add(errorLabel, 0, 13);
                     new Animate(errorLabel).fadeOut(3);
                 } catch (NumberFormatException nfe) {
                     nfe.printStackTrace();
-        
-                    // Handle invalid capacity input
                     Label errorLabel = new Label("Invalid input for capacity");
+                    errorLabel.getStyleClass().add("subtitle");  
                     gPane.add(errorLabel, 0, 13);
                     new Animate(errorLabel).fadeOut(3);
                 }
             };
-        
-            pane.add(new ModifyFlightPane("Modify Flights", this.connection, this.userState, stage, createFlightsInterface).createComponent(), 0, 1);
+
+            new ModifyFlightPane("Modify Flights", stage, createFlightsInterface).createPane(pane, userState, connection);
         }).createComponent();
+        editBtn.getStyleClass().add("button-1");  
         pane.add(editBtn, 0, 2);
 
-        // Load pane for delete actions
-        Node deleteBtn = new StyledButton1("Delete", e -> {
+        Node deleteBtn = new StyledButton1("Delete Flight", e -> {
             pane.getChildren().clear();
             ModifyFlightsInterface deleteFlightInterface = (gPane, tField) -> {
                 TextField textField = (TextField) (tField.getChildren().get(1));
@@ -139,31 +120,24 @@ public class EditFlightScreen extends Screen{
                 FlightDatabase flightDb = new FlightDatabase(this.connection);
 
                 try {
-
                     flightDb.deleteFlight(text);
-                       // Success label
                     String successText = "Successfully deleted Flight ".concat(text);
                     Label successLabel = new Label(successText);
-                    gPane.add(successLabel, 0, 3);
-
-                    //
-                   new Animate(successLabel).fadeOut(3);
-                
+                    successLabel.getStyleClass().add("subtitle");  
+                    gPane.add(successLabel, 0, 5);
+                    new Animate(successLabel).fadeOut(3);
                 } catch (SQLException error) {
-                    String failText = "Failed ";
+                    String failText = "Failed to delete flight";
                     Label failLabel = new Label(failText);
-                    gPane.add(failLabel, 0, 3);
-
-                    //
+                    failLabel.getStyleClass().add("subtitle"); 
+                    gPane.add(failLabel, 0, 5);
                     new Animate(failLabel).fadeOut(3);
-
-                   
                 }
             };
-            pane.add(new EditFlightPane(this.connection, userState, stage, deleteFlightInterface).createComponent(), 0, 1);
+            new EditFlightPane(stage, deleteFlightInterface).createPane(pane, userState, connection);
         }).createComponent();
+        deleteBtn.getStyleClass().add("button-1");  
         pane.add(deleteBtn, 0, 3);
-
 
         return pane;
     }

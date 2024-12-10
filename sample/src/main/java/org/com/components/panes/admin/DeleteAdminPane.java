@@ -1,11 +1,9 @@
-package org.com.components.panes;
-
+package org.com.components.panes.admin;
 
 
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.Map;
 
+import org.com.animations.Animate;
 import org.com.bases.Panes;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
@@ -19,16 +17,15 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
-public class LookupAdminPane extends Panes{
+public class DeleteAdminPane extends Panes {
     private Stage stage;
 
-    public LookupAdminPane(Stage stage){
+    public DeleteAdminPane(Stage stage) {
         this.stage = stage;
     }
 
-
     @Override
-    public void createPane(GridPane mainPane, UserState userState, Connection connection){
+    public void createPane(GridPane mainPane, UserState userState, Connection connection) {
         mainPane.getChildren().clear();
         
         GridPane pane = new GridPane();
@@ -38,30 +35,23 @@ public class LookupAdminPane extends Panes{
         GridPane adminNavBar = new AdminNavBar(this.stage, userState, connection, mainPane).createComponent();
         pane.add(adminNavBar, 0, 0);
 
-        Label titleLabel = new Label("Lookup User");
+        Label titleLabel = new Label("Delete User");
         titleLabel.getStyleClass().add("subtitle");
         pane.add(titleLabel, 0, 1);
 
-        GridPane lookupField = InputField.inputField("Username or SSN");
-        pane.add(lookupField, 0, 2);
-        // Fading error label
-        // 
+        GridPane usernameField = InputField.inputField("Username");
+        pane.add(usernameField, 0, 2);
+
+        // Add delete button with action and styling
         pane.add(new StyledButton1("Enter", 
             e -> {
-                try{
-                    TextField textField = (TextField) (lookupField.getChildren().get(1));
+                TextField field = (TextField) usernameField.getChildren().get(1);
+                new UserDatabase(connection).deleteUserByUsername(field.getText());
 
-                    UserDatabase userDb = new UserDatabase(connection);
-                    Map<String, Object> userInfo = userDb.retrieveAllInfoBySSN(textField.getText())[0];
-    
-                    new UserInfoPane(this.stage, userInfo).createPane(mainPane, userState, connection);
-                } catch (SQLException err){
-                    err.printStackTrace();
-                }
-               
+                Label deleteLabel = new Label("Successfully deleted");
+                pane.add(deleteLabel, 0, 4);
+                new Animate(deleteLabel).fadeOut(3);
             }
         ).createComponent(), 0, 3);
-
-
     }
 }
