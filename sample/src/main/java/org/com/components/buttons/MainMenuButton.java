@@ -9,18 +9,17 @@ import org.com.state.user.UserState;
 
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class MainMenuButton {
-    public static Button mainMenuButton(Connection connection, Stage stage, GridPane pane){
-        Button returnMain = new Button("Main Menu");
-        returnMain.setOnAction(e -> {
-           Scene scene =  new SplashScreen(connection).createScreen(stage);
-           stage.setScene(scene);
-           stage.show();
-        });
+    public static Node mainMenuButton(Connection connection, Stage stage, GridPane pane){
+        Node returnMain = new StyledButton1("Main Menu", e -> {
+            Scene scene =  new SplashScreen(connection).createScreen(stage);
+            stage.setScene(scene);
+            stage.show();
+         }).createComponent();
+    
         return returnMain;
     }
 

@@ -31,6 +31,7 @@ public class AdminNavBar extends Component{
     @Override
     public GridPane createComponent(){
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("navbar-primary");
         pane.setAlignment(Pos.TOP_CENTER);
         pane.setHgap(40);
 
@@ -38,7 +39,7 @@ public class AdminNavBar extends Component{
 
         pane.add(MainMenuButton.mainMenuButton(this.connection, this.stage, this.userState, this.mainPane), 0, 0);
 
-        pane.add(new StyledButton1("", e -> {new PushEditFlight().push(this.connection, userState, stage);}).createComponent(), 1, 0);
+        pane.add(new StyledButton1("Flights", e -> {new PushEditFlight().push(this.connection, userState, stage);}).createComponent(), 1, 0);
         
         pane.add(new ManageAdminsBtn(this.connection, this.userState, this.stage).createComponent(), 2, 0);
         

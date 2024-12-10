@@ -42,6 +42,7 @@ public class RegisterScreen extends Screen{
 
         // Register label
         Label registerLabel = new Label("Register");
+        registerLabel.getStyleClass().add("subtitle");
         pane.add(registerLabel, 0, 1, 2, 1);
 
         GridPane subpane = new GridPane();

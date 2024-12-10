@@ -5,11 +5,12 @@ import java.sql.Connection;
 import java.util.Map;
 
 import org.com.bases.Panes;
+import org.com.components.buttons.StyledButton1;
 import org.com.components.cards.UserInfoCard;
 import org.com.components.navBars.AdminNavBar;
 import org.com.state.user.UserState;
 
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -32,6 +33,7 @@ public class UserInfoPane extends Panes{
         mainPane.getChildren().clear();
         
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
         mainPane.add(pane, 0, 0);
 
         // Nav bar
@@ -40,8 +42,7 @@ public class UserInfoPane extends Panes{
 
 
         // Take the user back to the lookup screen
-        Button backButton = new Button("<-");
-        backButton.setOnAction(e -> new LookupAdminPane(this.stage).createPane(mainPane, userState, connection));
+        Node backButton = new StyledButton1("<-", e -> new LookupAdminPane(this.stage).createPane(mainPane, userState, connection)).createComponent();
         pane.add(backButton, 0, 1);
 
     

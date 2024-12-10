@@ -1,7 +1,6 @@
 package org.com.state.user;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -106,8 +105,7 @@ public class UserState {
         // set permissions
         this.setPermissions((String) (userInfo[0]).get("type"));
 
-        // Log user login in db
-        userdb.logTimestamp(new Timestamp(System.currentTimeMillis()), this.getUid());
+       
     }
 
     public void logout(){

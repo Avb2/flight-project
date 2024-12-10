@@ -3,6 +3,7 @@ package org.com.components.panes;
 
 import java.sql.Connection;
 
+import org.com.animations.Animate;
 import org.com.bases.Panes;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
@@ -11,6 +12,7 @@ import org.com.functionality.auth.Register;
 import org.com.models.RegistrationAdmin;
 import org.com.state.user.UserState;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -27,6 +29,7 @@ public class AddAdminPane extends Panes{
         mainPane.getChildren().clear();
         
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
         mainPane.add(pane, 0, 0);
 
         GridPane navBar = new AdminNavBar(this.stage, userState, connection, mainPane).createComponent();
@@ -68,7 +71,14 @@ public class AddAdminPane extends Panes{
                 if (valid.length == 4){
                     Register.createAdmin(connection, registrationModel);
                     System.out.println("Created admin");
+
+                    Label successLabel = new Label("Succesfully created");
+                    pane.add(successLabel, 0, 5);
+                    new Animate(successLabel).fadeOut(1);
                 } else {
+                    Label failureLabel = new Label("Failed to create");
+                    pane.add(failureLabel, 0, 5);
+                    new Animate(failureLabel).fadeOut(1);
                     System.out.println("Failed to create admin");
                 }
 

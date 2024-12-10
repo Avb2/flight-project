@@ -4,9 +4,9 @@ package org.com.screens.security;
 
 // Users will reset their password in this screen by first entering their username
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Map;
 
+import org.com.animations.Animate;
 import org.com.bases.Screen;
 import org.com.components.buttons.MainMenuButton;
 import org.com.components.buttons.StyledButton1;
@@ -16,6 +16,7 @@ import org.com.constants.Sizes;
 import org.com.database.UserDatabase;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -34,12 +35,16 @@ public class ResetPasswordScreen extends Screen {
         // Main pane
         GridPane pane = new GridPane();
         pane.getStyleClass().add("background-primary");
-        pane.setVgap(Sizes.largeGap);
-        pane.setAlignment(Pos.CENTER);
+        pane.setAlignment(Pos.TOP_CENTER);
+        pane.setVgap(Sizes.mediumGap);
 
+
+        
 
         // Main menu Btn
-        pane.add(MainMenuButton.mainMenuButton(this.connection, stage, pane), 0, 0);
+        Node mainmenuBtn = MainMenuButton.mainMenuButton(this.connection, stage, pane);
+        mainmenuBtn.getStyleClass().add("button-1");
+        pane.add(mainmenuBtn, 0, 1);
 
         
         // Reset password label
@@ -69,8 +74,15 @@ public class ResetPasswordScreen extends Screen {
                 Map<String, String> securityInfo =  new UserDatabase(this.connection).retrieveSecurityInfo(username);
                 pane.getChildren().remove(subPane);
                 pane.add(new SecurityQuestionPane(securityInfo.get("question"), securityInfo.get("answer"), username,this.connection, stage).createComponent(), 0, 3);
-                } catch (SQLException err){
-                err.printStackTrace();
+                } catch (Exception err){
+                
+                // ErrorLabel 
+                
+                Label errorLabel = new Label("No matching username");
+            
+                pane.add(errorLabel, 0, 3);
+                new Animate(errorLabel).fadeOut(3);
+        
                }
             }
             ).createComponent(), 1, 1);

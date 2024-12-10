@@ -21,8 +21,9 @@
     -fx-background-color: #95b5ff; 
     -fx-text-fill: #ffffff;       
     -fx-border-radius: 5;
-    -fx-padding: 6 12;             
+    -fx-padding:  12;             
     -fx-font-size: 14px;
+    -fx-margin: 10
 }
 
 .button-1:hover {
@@ -30,6 +31,27 @@
 }
 
 .button-1:pressed {
+    -fx-background-color: #426fbe; 
+}
+
+
+.button-2-small {
+    -fx-background-color: #95b5ff; 
+    -fx-text-fill: #ffffff;       
+    -fx-border-radius: 3; 
+    -fx-padding: 4 8; 
+    -fx-font-size: 12px; 
+    -fx-min-width: 24px; 
+    -fx-min-height: 24px; 
+    -fx-max-width: 32px; 
+    -fx-max-height: 32px; 
+}
+
+.button-2-small:hover {
+    -fx-background-color: #5984e0; 
+}
+
+.button-2-small:pressed {
     -fx-background-color: #426fbe; 
 }
 
@@ -52,7 +74,7 @@
 
 .text-field-label-1 {
     -fx-text-fill: #000000;
-    -fx-font-size: 15px;
+    -fx-font-size: 17px;
     -fx-padding: 5;
 }
 

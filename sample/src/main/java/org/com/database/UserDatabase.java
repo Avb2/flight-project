@@ -4,7 +4,6 @@ package org.com.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Map;
 
 import org.com.bases.Database;
@@ -74,8 +73,11 @@ public class UserDatabase extends Database{
     }
     
     
-    public void logTimestamp(Timestamp timestamp, int userId) throws SQLException {
-        super.updateQuery("INSERT INTO Logins (timestamp, uid) VALUES (?, ?)", new Object[] {timestamp, userId}, new Object[] {Timestamp.class, Integer.class});
+   
+
+
+    public void deleteUserByUsername(String username){
+        super.updateQuery("DELETE FROM Users WHERE username = ?" , new Object[]{username}, new Object[]{String.class});
     }
 
     public Map<String, String>[] retrieveName(String username) throws SQLException{
@@ -133,9 +135,5 @@ public class UserDatabase extends Database{
 
     }
 
-    public Map<String, String>[] retrieveLogins() throws SQLException{
-        ResultSet rs = super.query("SELECT uid, timestamp, Users.username FROM Logins RIGHT JOIN Users ON Users.id = Logins.uid");
-        return new ResultSetParser(rs).parseToStringDict(new String[] {"timestamp, uid, username"});
-    }
 
 }       

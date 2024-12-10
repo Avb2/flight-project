@@ -31,17 +31,22 @@ public class ModifyFlightPane extends Component{
         this.onAction = onAction;
     }
 
+
     @Override
     public Node createComponent(){
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
 
         Label titleLabel = new Label(title);
+        titleLabel.getStyleClass().add("subtitle");
         pane.add(titleLabel, 0, 0);
 
         Node backBtn = new StyledButton1("Back", e -> {
             new PushEditFlight().push(this.connection, this.userState, this.stage);
         }).createComponent();
         pane.add(backBtn, 0, 1);
+
+        
 
         // destination     
         GridPane numberField = InputField.inputField("Flight Number");
@@ -82,7 +87,7 @@ public class ModifyFlightPane extends Component{
 
             // Flight model
             Flight flight = new Flight(
-                Integer.parseInt(numberFieldText.getText()),
+                Integer.valueOf(numberFieldText.getText()),
                 destinationFieldText.getText(),
                 departureFieldText.getText(),
                 capacityFieldText.getText(),
@@ -91,8 +96,6 @@ public class ModifyFlightPane extends Component{
                 dateFieldFieldText.getText(),
                 statusFieldText.getText()
             );
-
-
             this.onAction.onClick(pane, flight);
         }).createComponent();
         pane.add(enterBtn, 0, 10);

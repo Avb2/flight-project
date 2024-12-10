@@ -37,8 +37,10 @@ public class CustomFlightPane extends Component{
     @Override
     public Node createComponent(){
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
 
         Label titleLabel = new Label(title);
+        titleLabel.getStyleClass().add("subtitle");
         pane.add(titleLabel, 0, 0);
 
         Node backBtn = new StyledButton1("Back", e -> {

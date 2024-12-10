@@ -14,7 +14,6 @@ import org.com.screens.security.ResetPasswordScreen;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -36,16 +35,16 @@ public class LoginScreen extends Screen {
          // Grid
          GridPane pane = new GridPane();
          pane.getStyleClass().add("background-primary");
-         pane.setAlignment(Pos.CENTER);
+         pane.setAlignment(Pos.TOP_CENTER);
          pane.setVgap(Sizes.mediumGap);
  
          // Return to Main Menu Button
-         Button mainMenuButton = MainMenuButton.mainMenuButton(this.connection, stage, pane);
+         Node mainMenuButton = MainMenuButton.mainMenuButton(this.connection, stage, pane);
          mainMenuButton.getStyleClass().add("button-1");
          pane.add(mainMenuButton, 0, 0);
  
          // Login title label
-         Label loginTitle = new Label("LOGIN");
+         Label loginTitle = new Label("Login");
          loginTitle.getStyleClass().add("title");
          pane.add(loginTitle, 0, 3);
  

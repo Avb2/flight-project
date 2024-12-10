@@ -11,6 +11,7 @@ import org.com.functionality.navigation.PushEditFlight;
 import org.com.state.user.UserState;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -35,15 +36,20 @@ public class EditFlightPane extends Component{
     @Override
     public Node createComponent(){
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
+
+        Label label = new Label("Delete Flight");
+        label.getStyleClass().add("subtitle");
+        pane.add(label, 0, 0);
 
         Node backBtn = new StyledButton1("Back", e -> {
             new PushEditFlight().push(this.connection, this.userState, this.stage);
         }).createComponent();
-        pane.add(backBtn, 0, 0);
+        pane.add(backBtn, 0, 1);
 
         // Flight Number field     
         GridPane flightNumberField = InputField.inputField("Flight Number");
-        pane.add(flightNumberField, 0, 1);
+        pane.add(flightNumberField, 0, 2);
         
       
         Node enterBtn = new StyledButton1("Enter", e -> {

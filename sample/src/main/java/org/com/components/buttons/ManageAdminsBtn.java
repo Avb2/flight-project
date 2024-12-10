@@ -1,14 +1,13 @@
 package org.com.components.buttons;
 
+import java.sql.Connection;
+
 import org.com.bases.Component;
 import org.com.screens.modify.EditAdminScreen;
 import org.com.state.user.UserState;
 
-import javafx.stage.Stage;
-import java.sql.Connection;
-
 import javafx.scene.Node;
-import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 
 public class ManageAdminsBtn extends Component{
@@ -25,9 +24,7 @@ public class ManageAdminsBtn extends Component{
 
     @Override 
     public Node createComponent(){
-        Button button = new Button("Admin");
-        button.setOnAction(e -> stage.setScene(new EditAdminScreen(this.connection, this.userState).createScreen(this.stage)));
-
+        Node button = new StyledButton1("Admin", e -> stage.setScene(new EditAdminScreen(this.connection, this.userState).createScreen(this.stage))).createComponent();
 
         return button;
         }

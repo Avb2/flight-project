@@ -52,5 +52,5 @@ public class ResetPassword {
                     }).createComponent(), 0, 2);
 
             }
-    }
+        }
 }

@@ -33,19 +33,21 @@ public class SecurityQuestionPane extends Component{
     public Node createComponent() {
         // 
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
 
-        
-        pane.add(new Label(this.question), 0, 0);
+        Label questionLabel = new Label(this.question);
+        questionLabel.getStyleClass().add("text-field-label-1");
+        pane.add(questionLabel, 0, 0);
 
 
         // Security Question answer field & label
-        pane.add(new Label(), 0, 0);
         GridPane answerPane = InputField.inputField("Answer");
-        pane.add(answerPane, 0, 1);
+        pane.add(answerPane, 0, 1, 2, 1);
 
 
         // Enter Button
         pane.add(new StyledButton1("Enter" , e -> {
+
             ResetPassword.answerSecurityQuestion(this.username, this.answer, answerPane, pane, this.connection, this.stage);
         }).createComponent(), 0, 2);
         return pane;

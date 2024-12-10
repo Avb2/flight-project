@@ -13,15 +13,16 @@ public class InputField {
         pane.setHgap(Sizes.mediumGap);
 
         // Username Label
-        Label usernamLabel = new Label(label);
-        usernamLabel.getStyleClass().add("text-field-label-1");
-        pane.add(usernamLabel, 0, 0);
+        Label headerLabel = new Label(label);
+        headerLabel.getStyleClass().add("text-field-label-1");
+        headerLabel.setPrefSize(150, 32);
+        pane.add(headerLabel, 0, 0);
 
         // Username Field
-        TextField usernameField = new TextField();
-        usernameField.getStyleClass().add("text-field-1");
-        usernameField.setPrefSize(210, 32);
-        pane.add(usernameField, 1, 0);
+        TextField field = new TextField();
+        field.getStyleClass().add("text-field-1");
+        field.setPrefSize(210, 32);
+        pane.add(field, 1, 0);
 
 
 

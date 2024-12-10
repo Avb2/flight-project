@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.Map;
 
 import org.com.bases.Screen;
+import org.com.components.buttons.StyledButton1;
 import org.com.components.cards.FlightCard;
 import org.com.components.navBars.NavBar;
 import org.com.constants.Sizes;
@@ -87,10 +88,7 @@ public class ManageFlights extends Screen{
             
 
             // Add Button
-            Button addBtn = new Button("+");
-            addBtn.getStyleClass().add("button-1");
-            // Create a booking
-            addBtn.setOnAction(e -> {
+            Node addBtn = new StyledButton1("+", e -> {
                 try {
                     
                     // Create Db objects
@@ -168,7 +166,9 @@ public class ManageFlights extends Screen{
                 }
                     
                
-                });
+                }).createComponent();
+            addBtn.getStyleClass().add("button-2-small");
+            
             tempPane.add(addBtn, 1,0);
             
 
@@ -178,7 +178,7 @@ public class ManageFlights extends Screen{
 
             // Delete button
             Button deleteBtn = new Button("-");
-            // remove a booking
+            deleteBtn.getStyleClass().add("button-2-small");
             deleteBtn.setOnAction(e -> {
                 try {
                     new BookingDatabase(this.connection).removeBooking(this.userState.getUid(), flightNumber);
@@ -187,6 +187,12 @@ public class ManageFlights extends Screen{
                 }
               
             });
+
+
+
+
+            // remove a booking
+           
             tempPane.add(deleteBtn, 1,1);
 
 

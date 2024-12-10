@@ -97,7 +97,7 @@ public class HomeScreen extends Screen{
                 
                 // Remove a booking
                 Button deleteBtn = new Button("-");
-                deleteBtn.getStyleClass().add("button-1");
+                deleteBtn.getStyleClass().add("button-2-small");
                 deleteBtn.setOnAction(e -> {
                     try {
                         new BookingDatabase(this.connection).removeBooking(this.userState.getUid(), Integer.parseInt(flightData[index].get(keys[0])));
@@ -109,6 +109,7 @@ public class HomeScreen extends Screen{
                     }
                     
                 });
+                
                 tempPane.add(deleteBtn, 1,0);
 
 

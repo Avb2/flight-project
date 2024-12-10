@@ -2,16 +2,14 @@ package org.com.screens.home;
 
 
 
-import javafx.stage.Stage;
+import java.sql.Connection;
 
 import org.com.bases.Screen;
 import org.com.components.navBars.AdminNavBar;
-
-import javafx.scene.layout.GridPane;
-
 import org.com.state.user.UserState;
 
-import java.sql.Connection;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public class AdminHomeScreen extends Screen {
@@ -29,6 +27,7 @@ public class AdminHomeScreen extends Screen {
     public GridPane createPane(Stage stage){
         // Create main pane
         GridPane pane = new GridPane();
+        pane.getStyleClass().add("background-primary");
         pane.add(new AdminNavBar(stage, userState, this.connection, pane).createComponent(), 0, 0);   
 
         return pane;

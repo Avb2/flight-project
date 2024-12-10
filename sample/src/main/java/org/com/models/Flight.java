@@ -54,6 +54,22 @@ public class Flight {
             this.status = status;
     }
 
+    public void cleanFields() {
+        if (destination != null && "".equals(destination)) {
+            destination = null;
+        }
+        if (capacity != null && "".equals(capacity)) {
+            capacity = null;
+        }
+        if (departureLocation != null && "".equals(departureLocation)) {
+            departureLocation = null;
+        }
+        if (status != null && "".equals(status)) {
+            status = null;
+        }
+    }
+    
+
     // Getters
     public Integer getId() {
         return id;
@@ -84,6 +100,41 @@ public class Flight {
 
     public String getStatus() {
         return status;
+    }   
+
+
+
+
+    // Setters
+    public Integer setId() {
+        return id;
+    }
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setDepartureLocation(String departureLocation) {
+        this.departureLocation =  departureLocation;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setTakeoffTime(String takeoffTime) {
+        this.takeoffTime = takeoffTime;
+    }
+
+    public void setLandingTime(String landingTime) {
+        this.landingTime = landingTime;
+    }
+
+    public void setFlightDate(String flightDate) {
+        this.flightDate =  flightDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }   
 
 }

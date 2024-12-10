@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 
 import org.com.animations.Animate;
 import org.com.bases.Screen;
+import org.com.components.buttons.StyledButton1;
 import org.com.components.navBars.AdminNavBar;
 import org.com.components.panes.CustomFlightPane;
 import org.com.components.panes.EditFlightPane;
@@ -18,7 +19,7 @@ import org.com.functionality.flights.ModifyFlightsInterface;
 import org.com.state.user.UserState;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -40,8 +41,7 @@ public class EditFlightScreen extends Screen{
         pane.setAlignment(Pos.TOP_CENTER);
 
         // Load pane for action
-        Button addBtn = new Button("Add");
-        addBtn.setOnAction(e -> {
+        Node addBtn = new StyledButton1("Add", e -> {
             pane.getChildren().clear();
 
             CreateFlightsInterface createFlightsInterface = (gPane, flight) -> {
@@ -52,41 +52,7 @@ public class EditFlightScreen extends Screen{
 
                     // Added label
                     Label addedLabel = new Label("Succesffully added");
-                    gPane.add(addedLabel, 0 , 8);
-                    new Animate(addedLabel).fadeOut(4);
-                } catch (SQLException se) {
-                    se.printStackTrace();
-                }
-              
-
-            };
-
-            pane.add(new CustomFlightPane("Add Flights", this.connection, this.userState, stage, createFlightsInterface).createComponent(), 0, 1);
-        });
-        pane.add(addBtn, 0, 1);
-
-
-        // Load pane for edit 
-        Button editBtn = new Button("Edit");
-        editBtn.setOnAction(e -> {
-            pane.getChildren().clear();
-            CreateFlightsInterface createFlightsInterface = (gPane, flight) -> {
-                System.out.println(flight.getDepartureLocation());
-                try {
-                      // Add data to db 
-                    new FlightDatabase(this.connection).updateFlight(
-                        flight.getId(),
-                        flight.getDestination(),
-                        flight.getDepartureLocation(),
-                        Integer.parseInt(flight.getCapacity()),
-                        Timestamp.valueOf(flight.getTakeoffTime()),
-                        Timestamp.valueOf(flight.getLandingTime()),
-                        Date.valueOf(flight.getFlightDate()),
-                        flight.getStatus()
-                        );
-                    // Added label
-                    Label addedLabel = new Label("Succesffully modified");
-                    gPane.add(addedLabel, 0 , 10);
+                    gPane.add(addedLabel, 0 , 12);
                     new Animate(addedLabel).fadeOut(3);
                 } catch (SQLException se) {
                     se.printStackTrace();
@@ -95,14 +61,77 @@ public class EditFlightScreen extends Screen{
 
             };
 
+            pane.add(new CustomFlightPane("Add Flights", this.connection, this.userState, stage, createFlightsInterface).createComponent(), 0, 1);
+        }).createComponent();
+        pane.add(addBtn, 0, 1);
+
+
+        // Load pane for edit 
+        Node editBtn = new StyledButton1("Edit", e -> {
+            pane.getChildren().clear();
+            CreateFlightsInterface createFlightsInterface = (gPane, flight) -> {
+                System.out.println(flight.getDepartureLocation());
+                try { 
+                    Timestamp takeoffTimestamp = flight.getTakeoffTime() == ""
+                        ? null 
+                        : Timestamp.valueOf(flight.getTakeoffTime());
+                    Timestamp landingTimestamp = flight.getLandingTime() == ""
+                        ? null 
+                        : Timestamp.valueOf(flight.getLandingTime());
+                    Date flightDate = flight.getFlightDate() == "" 
+                        ? null 
+                        : Date.valueOf(flight.getFlightDate());
+
+                    flight.cleanFields();
+
+                    System.out.println(flight.getId());
+                    System.out.println(flight.getDestination());
+                    System.out.println(flight.getDepartureLocation());
+                    System.out.println(flight.getCapacity());
+                    System.out.println(takeoffTimestamp);
+                    System.out.println(landingTimestamp);
+                    System.out.println(flight.getFlightDate());
+                    System.out.println(flight.getStatus());
+        
+                    // Add data to db
+                    new FlightDatabase(this.connection).updateFlight(
+                        flight.getId(),
+                        flight.getDestination(),
+                        flight.getDepartureLocation(),
+                        "".equals(flight.getCapacity()) ? Integer.valueOf(flight.getCapacity()) : null,
+                        takeoffTimestamp,
+                        landingTimestamp,
+                        flightDate,
+                        flight.getStatus()
+                    );
+        
+                    // Success label
+                    Label addedLabel = new Label("Successfully modified");
+                    gPane.add(addedLabel, 0, 13);
+                    new Animate(addedLabel).fadeOut(3);
+                } catch (SQLException se) {
+                    se.printStackTrace();
+        
+                    // Failure label
+                    Label errorLabel = new Label("Failed to modify flight");
+                    gPane.add(errorLabel, 0, 13);
+                    new Animate(errorLabel).fadeOut(3);
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+        
+                    // Handle invalid capacity input
+                    Label errorLabel = new Label("Invalid input for capacity");
+                    gPane.add(errorLabel, 0, 13);
+                    new Animate(errorLabel).fadeOut(3);
+                }
+            };
+        
             pane.add(new ModifyFlightPane("Modify Flights", this.connection, this.userState, stage, createFlightsInterface).createComponent(), 0, 1);
-        });
+        }).createComponent();
         pane.add(editBtn, 0, 2);
 
-
         // Load pane for delete actions
-        Button deleteBtn = new Button("Delete");
-        deleteBtn.setOnAction(e -> {
+        Node deleteBtn = new StyledButton1("Delete", e -> {
             pane.getChildren().clear();
             ModifyFlightsInterface deleteFlightInterface = (gPane, tField) -> {
                 TextField textField = (TextField) (tField.getChildren().get(1));
@@ -132,7 +161,7 @@ public class EditFlightScreen extends Screen{
                 }
             };
             pane.add(new EditFlightPane(this.connection, userState, stage, deleteFlightInterface).createComponent(), 0, 1);
-        });
+        }).createComponent();
         pane.add(deleteBtn, 0, 3);
 
 
