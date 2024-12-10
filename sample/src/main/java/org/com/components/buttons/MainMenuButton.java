@@ -7,6 +7,7 @@ import org.com.screens.home.HomeScreen;
 import org.com.screens.landing.SplashScreen;
 import org.com.state.user.UserState;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -23,9 +24,8 @@ public class MainMenuButton {
         return returnMain;
     }
 
-    public static Button mainMenuButton(Connection connection, Stage stage, UserState userState, GridPane pane){
-        Button returnMain = new Button("Main Menu");
-        returnMain.setOnAction(e -> {
+    public static Node mainMenuButton(Connection connection, Stage stage, UserState userState, GridPane pane){
+        Node returnMain = new StyledButton1("Main Menu", e -> {
             if (userState.getLoggedInState() && userState.getPermissions().matches("user") ){
                 stage.setScene(new HomeScreen(connection, userState).createScreen(stage));
                 stage.show();
@@ -37,7 +37,8 @@ public class MainMenuButton {
                 stage.setScene(new SplashScreen(connection).createScreen(stage));
                 stage.show();
             }
-        });
+        }).createComponent();
+      
         return returnMain;
     }
 }

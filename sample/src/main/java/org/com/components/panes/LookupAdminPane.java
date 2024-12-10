@@ -2,9 +2,9 @@ package org.com.components.panes;
 
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Map;
 
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 import org.com.bases.Panes;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
@@ -13,8 +13,8 @@ import org.com.database.UserDatabase;
 import org.com.state.user.UserState;
 
 import javafx.scene.control.TextField;
-import java.sql.SQLException;
-import java.util.Map;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public class LookupAdminPane extends Panes{
@@ -38,9 +38,6 @@ public class LookupAdminPane extends Panes{
 
         GridPane lookupField = InputField.inputField("Username or SSN");
         pane.add(lookupField, 0, 1);
-
-
-
         // Fading error label
 
         // 

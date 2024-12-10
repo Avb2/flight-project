@@ -1,9 +1,10 @@
 package org.com.bases;
 
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.layout.GridPane;
 import org.com.constants.Sizes;
+
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 public abstract class Screen {
@@ -17,8 +18,6 @@ public abstract class Screen {
 
         return scene;
     }
-
-
    
 }
 

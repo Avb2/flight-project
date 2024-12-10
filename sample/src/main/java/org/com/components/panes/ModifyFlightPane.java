@@ -1,6 +1,5 @@
 package org.com.components.panes;
 
-
 import java.sql.Connection;
 
 import org.com.bases.Component;
@@ -17,22 +16,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-
-public class CustomFlightPane extends Component{
+public class ModifyFlightPane extends Component{
     String title;
     private Connection connection;
     private UserState userState;
     private Stage stage;
     CreateFlightsInterface onAction;
 
-    public CustomFlightPane(String title, Connection connection, UserState userState, Stage stage, CreateFlightsInterface onAction){
+    public ModifyFlightPane(String title, Connection connection, UserState userState, Stage stage, CreateFlightsInterface onAction){
         this.title = title;
         this.connection = connection;
         this.userState = userState;
         this.stage = stage;
         this.onAction = onAction;
     }
-
 
     @Override
     public Node createComponent(){
@@ -46,33 +43,35 @@ public class CustomFlightPane extends Component{
         }).createComponent();
         pane.add(backBtn, 0, 1);
 
-        
-
         // destination     
+        GridPane numberField = InputField.inputField("Flight Number");
+        pane.add(numberField, 0, 2);
+
         GridPane destinationField = InputField.inputField("Destination");
-        pane.add(destinationField, 0, 2);
+        pane.add(destinationField, 0, 3);
         //        departure location         
         GridPane departureField = InputField.inputField("Departure Location");
-        pane.add(departureField, 0, 3);
+        pane.add(departureField, 0, 4);
         // capacity 
         GridPane capacityField = InputField.inputField("Capacity");
-        pane.add(capacityField, 0, 4);
+        pane.add(capacityField, 0, 5);
         //          takeoff       
         GridPane takeoffField = InputField.inputField("Takeoff Time");  
-        pane.add(takeoffField, 0, 5);  
+        pane.add(takeoffField, 0, 6);  
         //          landing
         GridPane landingField = InputField.inputField("Landing time");
-        pane.add(landingField, 0, 6);          
+        pane.add(landingField, 0, 7);          
         //    date   
         GridPane dateField = InputField.inputField("Flight Date"); 
-        pane.add(dateField, 0, 7);
+        pane.add(dateField, 0, 8);
         //  status  
         GridPane statusField = InputField.inputField("Current Status");
-        pane.add(statusField, 0, 8);
+        pane.add(statusField, 0, 9);
 
         
         Node enterBtn = new StyledButton1("Enter", e -> {
             // Get strings
+            TextField numberFieldText = (TextField) (numberField.getChildren().get(1));
             TextField destinationFieldText = (TextField) (destinationField.getChildren().get(1));
             TextField departureFieldText = (TextField) (departureField.getChildren().get(1));
             TextField capacityFieldText = (TextField) (capacityField.getChildren().get(1));
@@ -83,6 +82,7 @@ public class CustomFlightPane extends Component{
 
             // Flight model
             Flight flight = new Flight(
+                Integer.parseInt(numberFieldText.getText()),
                 destinationFieldText.getText(),
                 departureFieldText.getText(),
                 capacityFieldText.getText(),
@@ -95,7 +95,7 @@ public class CustomFlightPane extends Component{
 
             this.onAction.onClick(pane, flight);
         }).createComponent();
-        pane.add(enterBtn, 0, 9);
+        pane.add(enterBtn, 0, 10);
 
     
     return pane;

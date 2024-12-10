@@ -47,4 +47,22 @@ public class FlightDatabase extends Database {
         return super.query("SELECT * FROM Flights WHERE number = ?", new Object[] {fid}, new Object[] {Integer.class});
     }
 
+
+    public void updateFlight(
+    int fid, 
+    String destination, 
+    String departureLocation, 
+    Integer capacity, 
+    Timestamp takeoff, 
+    Timestamp landing, 
+    Date date, 
+    String status
+) throws SQLException {
+    super.updateQuery(
+        "UPDATE Flights SET destination = COALESCE(?, destination), departureLocation = COALESCE(?, departureLocation), capacity = COALESCE(?, capacity), takeoff = COALESCE(?, takeoff), landing = COALESCE(?, landing), date = COALESCE(?, date), status = COALESCE(?, status) WHERE number = ?;",
+        new Object[]{destination, departureLocation, capacity, takeoff, landing, date, status, fid},
+        new Object[]{String.class, String.class, Integer.class, Timestamp.class, Timestamp.class, Date.class, String.class, Integer.class}
+    );
+}
+
 }
