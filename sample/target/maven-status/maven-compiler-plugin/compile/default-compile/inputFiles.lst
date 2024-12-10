@@ -23,6 +23,7 @@
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/screens/modify/EditAdminScreen.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/screens/landing/LoginScreen.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/functionality/flights/CreateFlightsInterface.java
+/Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/components/navBars/FilterBar.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/database/UserDatabase.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/constants/Sizes.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/components/panes/admin/LookupAdminPane.java
