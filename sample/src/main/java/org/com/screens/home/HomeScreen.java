@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.com.bases.Screen;
 import org.com.components.cards.FlightCard;
+import org.com.components.navBars.AdminNavBar;
 import org.com.components.navBars.NavBar;
 import org.com.constants.Sizes;
 import org.com.database.BookingDatabase;
@@ -43,7 +44,10 @@ public class HomeScreen extends Screen{
         pane.setVgap(Sizes.largeGap);
         pane.setPadding(new Insets(10,10,10,10));
 
-        pane.add(new NavBar(this.connection, stage, this.userState, pane).createComponent(), 0, 0);
+        GridPane navbar = userState.getPermissions().matches("admin") 
+        ? (GridPane) new AdminNavBar(stage, this.userState, this.connection, pane).createComponent() 
+        : (GridPane) new NavBar(this.connection, stage, this.userState, pane).createComponent();
+    pane.add(navbar, 0, 0);
 
         String name = null;
         try {
@@ -72,11 +76,6 @@ public class HomeScreen extends Screen{
     
         subPane.setVgap(Sizes.smallGap);
         
-
-        // Refresh button to load new flights
-        // Retrieve flights
-
-        // Create flight cards
 
         // Get all flights
         String[] keys = new String[] {"number","takeoff", "destination", "status"};

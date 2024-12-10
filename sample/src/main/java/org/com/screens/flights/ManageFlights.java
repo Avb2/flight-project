@@ -40,173 +40,114 @@ public class ManageFlights extends Screen{
     }
 
     @Override
-    public GridPane createPane(Stage stage){
+    public GridPane createPane(Stage stage) {
         GridPane pane = new GridPane();
         pane.getStyleClass().add("background-primary");
-        pane.setPadding(new Insets(10,10,10,10));
+        pane.setPadding(new Insets(10, 10, 10, 10));
         pane.setAlignment(Pos.TOP_CENTER);
         pane.setVgap(Sizes.largeGap);
         pane.add(new NavBar(this.connection, stage, this.userState, pane).createComponent(), 0, 0);
-
-
-        Label titleLabel = new Label("Manage flights");
+    
+        Label titleLabel = new Label("Manage Flights");
         titleLabel.getStyleClass().add("title");
-        pane.add(titleLabel, 0 ,1);
-
-
+        pane.add(titleLabel, 0, 1);
+    
         ScrollPane scrollPane = new ScrollPane();
+        scrollPane.getStyleClass().add("text-field-1"); 
         pane.add(scrollPane, 0, 3);
-
-
+    
         GridPane subPane = new GridPane();
         scrollPane.setContent(subPane);
-        
-
-
-        // TODO move this elsewhere, business logic
-        // Get all flights
-        String[] keys = new String[] {"number", "departureLocation", "destination", "status"};
-
     
-        try{
+        String[] keys = new String[]{"number", "departureLocation", "destination", "status"};
+    
+        try {
             Map<String, String>[] flightData = new ResultSetParser(new FlightDatabase(this.connection).retrieveFlights()).parseToStringDict(keys);
-               
-
-        for (int i = 0; i < flightData.length; i++){
-            if (flightData[i] != null) {
-            GridPane tempPane = new GridPane();
-            Node flightCard = new FlightCard(flightData[i].get(keys[0]), flightData[i].get(keys[1]), flightData[i].get(keys[2]), flightData[i].get(keys[3])).createComponent();
-            tempPane.add(flightCard, 0, 0, 1, 2);
-
-
-
-            final int index = i;
-            // Get the flight number of the selected flight
-            int flightNumber = Integer.parseInt(flightData[index].get(keys[0]));
-
-
-            
-
-            // Add Button
-            Node addBtn = new StyledButton1("+", e -> {
-                try {
-                    
-                    // Create Db objects
-                    FlightDatabase flightDb = new FlightDatabase(this.connection);
-                    BookingDatabase bookingDb = new BookingDatabase(this.connection);
-
-                    
-                    
-                    // Retrieve the selected flight time by fid
-                    ResultSet selectedFlight = flightDb.retrieveFlight(flightNumber);
-                    ResultSetParser selectedFlightRP = new ResultSetParser(selectedFlight);
-                    // Convert to an array of Maps
-                    Map<String, Object>[] selectedFlightDict = selectedFlightRP.parse(new String[] {"takeoff", "landing"}, new Class<?>[] {Timestamp.class, Timestamp.class});
-                    // Select the first map in the array which contains the selected flights information
-                    Map<String, Object> selectedFlightData = selectedFlightDict[0];
-                    // Get the takeoff and landing time from the selected flight data
-                    Timestamp selectedTakeoff = (Timestamp) (selectedFlightData.get("takeoff"));
-                    Timestamp selectedLanding = (Timestamp) (selectedFlightData.get("landing"));
-
-
-                
-                    // Retrieve current booking times
-                    ResultSet bookedTimes  = bookingDb.retrieveTimes(flightNumber);
-                    ResultSetParser bookedTimesRP= new ResultSetParser(bookedTimes);
-                    // Convert to an array of maps
-                    Map<String, Object>[] bookedTimesDict = bookedTimesRP.parse(new String[] {"takeoff", "landing"}, new Class<?>[] {Timestamp.class, Timestamp.class});
-                    
-                    // Default conflict value set to false
-                    boolean conflict = false;
-
-                    System.out.format("%d is the length%n", bookedTimesDict.length);
-
-                    // If bookings for the user exist check for conflicts
-                    if ( bookedTimesDict != null) {
-                          // Compare booking times with time of selected flights for time conflicts 
-                          for (Map<String, Object> times: bookedTimesDict) {
-            
-                            // Get the takeoff and landing time of the indexed flight booking
-                            Timestamp existingTakeoff = (Timestamp) (times.get("takeoff"));
-                            Timestamp existingLanding = (Timestamp) (times.get("landing"));
     
-                            
-                            System.out.println(selectedTakeoff);
-                            System.out.println(selectedLanding);
-                            System.out.println(existingLanding);
-                            System.out.println(existingTakeoff);
-                            
-                            if ((existingTakeoff.before(selectedLanding) && selectedTakeoff.after(existingTakeoff)) || 
-                            (existingTakeoff.before(selectedTakeoff) && selectedLanding.after(existingTakeoff)) || 
-                            (selectedTakeoff.before(existingTakeoff) && selectedLanding.after(existingLanding))){
-                                conflict = true;
-                            }
-                        }
+            for (int i = 0; i < flightData.length; i++) {
+                if (flightData[i] != null) {
+                    GridPane tempPane = new GridPane();
     
-                    }
-
-                      
-                    if (conflict == false){
+                    Node flightCard = new FlightCard(
+                        flightData[i].get(keys[0]), 
+                        flightData[i].get(keys[1]), 
+                        flightData[i].get(keys[2]), 
+                        flightData[i].get(keys[3])
+                    ).createComponent();
+                    tempPane.add(flightCard, 0, 0, 1, 2);
+    
+                    final int index = i;
+                    int flightNumber = Integer.parseInt(flightData[index].get(keys[0]));
+    
+                    // Add Button
+                    Node addBtn = new StyledButton1("+", e -> {
                         try {
-                          // Add flight if no conflicts
-                            bookingDb.createBooking(this.userState.getUid(), flightNumber);
-                            System.out.println("Added flight");
+                            FlightDatabase flightDb = new FlightDatabase(this.connection);
+                            BookingDatabase bookingDb = new BookingDatabase(this.connection);
+    
+                            ResultSet selectedFlight = flightDb.retrieveFlight(flightNumber);
+                            ResultSetParser selectedFlightRP = new ResultSetParser(selectedFlight);
+                            Map<String, Object>[] selectedFlightDict = selectedFlightRP.parse(
+                                new String[]{"takeoff", "landing"}, 
+                                new Class<?>[]{Timestamp.class, Timestamp.class}
+                            );
+                            Map<String, Object> selectedFlightData = selectedFlightDict[0];
+                            Timestamp selectedTakeoff = (Timestamp) selectedFlightData.get("takeoff");
+                            Timestamp selectedLanding = (Timestamp) selectedFlightData.get("landing");
+    
+                            ResultSet bookedTimes = bookingDb.retrieveTimes(flightNumber);
+                            ResultSetParser bookedTimesRP = new ResultSetParser(bookedTimes);
+                            Map<String, Object>[] bookedTimesDict = bookedTimesRP.parse(
+                                new String[]{"takeoff", "landing"}, 
+                                new Class<?>[]{Timestamp.class, Timestamp.class}
+                            );
+    
+                            boolean conflict = false;
+                            if (bookedTimesDict != null) {
+                                for (Map<String, Object> times : bookedTimesDict) {
+                                    Timestamp existingTakeoff = (Timestamp) times.get("takeoff");
+                                    Timestamp existingLanding = (Timestamp) times.get("landing");
+    
+                                    if ((existingTakeoff.before(selectedLanding) && selectedTakeoff.after(existingTakeoff)) ||
+                                        (existingTakeoff.before(selectedTakeoff) && selectedLanding.after(existingTakeoff)) ||
+                                        (selectedTakeoff.before(existingTakeoff) && selectedLanding.after(existingLanding))) {
+                                        conflict = true;
+                                    }
+                                }
+                            }
+    
+                            if (!conflict) {
+                                bookingDb.createBooking(this.userState.getUid(), flightNumber);
+                                System.out.println("Added flight");
+                            } else {
+                                System.out.println("Time Conflict!");
+                            }
                         } catch (SQLException se) {
                             se.printStackTrace();
-                            System.out.println("COuldnt Added flight");
                         }
-                        
-                    } else {
-                        System.out.println("Time Conflict!");
-                    } 
-               
-               
-                } catch (SQLException se) {
-                    se.printStackTrace();
+                    }).createComponent();
+                    addBtn.getStyleClass().add("button-2-small");
+                    tempPane.add(addBtn, 1, 0);
+    
+                    // Delete Button
+                    Button deleteBtn = new Button("-");
+                    deleteBtn.getStyleClass().add("button-2-small");
+                    deleteBtn.setOnAction(e -> {
+                        try {
+                            new BookingDatabase(this.connection).removeBooking(this.userState.getUid(), flightNumber);
+                        } catch (SQLException se) {
+                            se.printStackTrace();
+                        }
+                    });
+                    tempPane.add(deleteBtn, 1, 1);
+    
+                    subPane.add(tempPane, 0, i);
                 }
-                    
-               
-                }).createComponent();
-            addBtn.getStyleClass().add("button-2-small");
-            
-            tempPane.add(addBtn, 1,0);
-            
-
-
-
-
-
-            // Delete button
-            Button deleteBtn = new Button("-");
-            deleteBtn.getStyleClass().add("button-2-small");
-            deleteBtn.setOnAction(e -> {
-                try {
-                    new BookingDatabase(this.connection).removeBooking(this.userState.getUid(), flightNumber);
-                } catch (SQLException se) {
-                    se.printStackTrace();
-                }
-              
-            });
-
-
-
-
-            // remove a booking
-           
-            tempPane.add(deleteBtn, 1,1);
-
-
-            subPane.add(tempPane, 0, i);}
-        }
-
-
-
-        } catch (SQLException e){
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
+    
         return pane;
-        
-    }   
-}
+    }
+    }

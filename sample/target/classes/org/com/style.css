@@ -98,3 +98,37 @@
 .navbar-primary .menu-item:hover {
     -fx-background-color: #476cb1; /* Slightly darker on hover */
 }
+
+
+.flight-card-pane {
+    -fx-background-color: #f8f9fa;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 2, 2);
+    -fx-padding: 15;
+    -fx-border-radius: 8;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1.5;
+}
+
+.flight-number-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.flight-status-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #888;
+}
+
+.departure-location-label, .destination-label {
+    -fx-font-size: 14px;
+}
+
+.arrow-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.time-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #555;
+}

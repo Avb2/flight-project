@@ -2,26 +2,21 @@ package org.com.components.cards;
 
 import org.com.bases.Component;
 
-import javafx.geometry.Insets;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
 
 
-public class FlightCard extends Component{
+public class FlightCard extends Component {
     private String number;
     private String departureLocation;
     private String destination;
     private String status;
 
-    public FlightCard(String number, String departureLocation, String destination, String status){
+    public FlightCard(String number, String departureLocation, String destination, String status) {
         this.number = number;
         this.departureLocation = departureLocation;
         this.destination = destination;
@@ -29,37 +24,51 @@ public class FlightCard extends Component{
     }
 
     @Override
-    public Node createComponent() {
-        GridPane pane = new GridPane();
-        pane.setBorder(new Border(new BorderStroke(
-            Color.BLACK,               
-            BorderStrokeStyle.SOLID,    
-            new CornerRadii(5),      
-            new BorderWidths(2)))); 
+public Node createComponent() {
+    GridPane pane = new GridPane();
+    pane.getStyleClass().add("flight-card-pane");
 
-        pane.setPadding(new Insets(10, 10, 10, 10));
-
-        Label flightNumLabel = new Label(this.number);
-        pane.add(flightNumLabel, 0, 0, 5, 1);
-
-        Label flightStatus = new Label(this.status);
-        pane.add(flightStatus, 6, 0);
-
-        Label departureLocationLabel = new Label(this.departureLocation);
-        pane.add(departureLocationLabel, 0, 1);
+    pane.setHgap(10);
+    pane.setVgap(10);
+    pane.setMinWidth(400);
+    pane.setAlignment(Pos.CENTER);
 
 
-        Label toArrowLabel = new Label("----->");
-        pane.add(toArrowLabel, 2, 1);
+    // Flight Number label
+    Label flightNumLabel = new Label("Flight: " + this.number);
+    flightNumLabel.getStyleClass().add("flight-number-label");
+    pane.add(flightNumLabel, 0, 0, 3, 1);
 
-        Label destinationLabel = 
-        new Label(this.destination);
-        pane.add(destinationLabel, 4, 1);
+    // Status label
+    Label flightStatus = new Label("Status: " + this.status);
+    flightStatus.getStyleClass().add("flight-status-label");
+    GridPane.setHalignment(flightStatus, HPos.RIGHT);
+    pane.add(flightStatus, 3, 0);
 
-        Label timeLabel = new Label("");
-        pane.add(timeLabel, 2, 2);
+    // Departure Location label
+    Label departureLocationLabel = new Label("From: " + this.departureLocation);
+    departureLocationLabel.getStyleClass().add("departure-location-label");
+    pane.add(departureLocationLabel, 0, 1);
 
-      
-        return pane;
-    }
+    // Arrow label
+    Label toArrowLabel = new Label("➔");
+    toArrowLabel.getStyleClass().add("arrow-label");
+    GridPane.setHalignment(toArrowLabel, HPos.CENTER);
+    pane.add(toArrowLabel, 1, 1);
+
+    // Destination label
+    Label destinationLabel = new Label("To: " + this.destination);
+    destinationLabel.getStyleClass().add("destination-label");
+    GridPane.setHalignment(destinationLabel, HPos.RIGHT);
+    pane.add(destinationLabel, 2, 1);
+
+    // Time label
+    Label timeLabel = new Label("Time: TBD");
+    timeLabel.getStyleClass().add("time-label");
+    GridPane.setHalignment(timeLabel, HPos.CENTER);
+    pane.add(timeLabel, 1, 2);
+
+    return pane;
+}
+
 }

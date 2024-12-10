@@ -2,7 +2,6 @@ package org.com.components.buttons;
 
 import java.sql.Connection;
 
-import org.com.screens.home.AdminHomeScreen;
 import org.com.screens.home.HomeScreen;
 import org.com.screens.landing.SplashScreen;
 import org.com.state.user.UserState;
@@ -25,13 +24,10 @@ public class MainMenuButton {
 
     public static Node mainMenuButton(Connection connection, Stage stage, UserState userState, GridPane pane){
         Node returnMain = new StyledButton1("Main Menu", e -> {
-            if (userState.getLoggedInState() && userState.getPermissions().matches("user") ){
+            if (userState.getLoggedInState()){
                 stage.setScene(new HomeScreen(connection, userState).createScreen(stage));
                 stage.show();
                 
-            } else if (userState.getLoggedInState() && userState.getPermissions().matches("admin") ){
-                stage.setScene(new AdminHomeScreen(connection, userState).createScreen(stage));
-                stage.show();
             } else {
                 stage.setScene(new SplashScreen(connection).createScreen(stage));
                 stage.show();

@@ -1,106 +1,109 @@
 package org.com.screens.registration;
 
-
-// Users will register for the application by entering valid information
-
 import java.sql.Connection;
 
 import org.com.bases.Screen;
 import org.com.components.buttons.MainMenuButton;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
+import org.com.constants.Sizes;
 import org.com.functionality.auth.Register;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+public class RegisterScreen extends Screen {
+    private final Connection connection;
 
-
-public class RegisterScreen extends Screen{
-    private Connection connection;
-
-
-    public RegisterScreen(Connection connection){
+    public RegisterScreen(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public GridPane createPane(Stage stage){
-        
-        
-        // Grid pane
+    public GridPane createPane(Stage stage) {
+        // Main pane
         GridPane pane = new GridPane();
         pane.getStyleClass().add("background-primary");
-        pane.setAlignment(Pos.CENTER);
+        pane.setAlignment(Pos.TOP_CENTER);
+        pane.setVgap(Sizes.mediumGap);
+        pane.setPadding(new Insets(20));
 
-        // main menu
-        pane.add(MainMenuButton.mainMenuButton(this.connection, stage, pane), 0 ,0);
-
-
+        // Main menu button
+        Node mainMenuButton = MainMenuButton.mainMenuButton(this.connection, stage, pane);
+        mainMenuButton.getStyleClass().add("button-1");
+        pane.add(mainMenuButton, 0, 0);
 
         // Register label
         Label registerLabel = new Label("Register");
-        registerLabel.getStyleClass().add("subtitle");
-        pane.add(registerLabel, 0, 1, 2, 1);
+        registerLabel.getStyleClass().add("title");
+        registerLabel.setAlignment(Pos.CENTER);
+        pane.add(registerLabel, 0, 1);
 
+        // Create a subpane for the input fields
         GridPane subpane = new GridPane();
-        pane.add(subpane, 0, 4);
+        subpane.getStyleClass().add("flight-card-pane");
+        subpane.setVgap(Sizes.smallGap);
+        subpane.setHgap(Sizes.mediumGap);
+        subpane.setPadding(new Insets(15));
 
-        // First name
-        GridPane firstNameField = InputField.inputField("First Name");
-        subpane.add(firstNameField, 0 ,0);
-        
-        // last name 
-        GridPane lastNameField = InputField.inputField("Last Name");
-        subpane.add(lastNameField,0 ,1);
+        // Input fields
+        addInputField(subpane, "First Name", 0);
+        addInputField(subpane, "Last Name", 1);
+        addInputField(subpane, "Address", 2);
+        addInputField(subpane, "Zipcode", 3);
+        addInputField(subpane, "State", 4);
+        addInputField(subpane, "Username", 5);
+        addInputField(subpane, "Password", 6);
+        addInputField(subpane, "Email", 7);
+        addInputField(subpane, "SSN", 8);
+        addInputField(subpane, "Security Question", 9);
+        addInputField(subpane, "Security Answer", 10);
 
-        // Address
-        GridPane addressField =  InputField.inputField("Address");
-        subpane.add(addressField,0 ,2);
+        // Wrap the subpane in a ScrollPane
+        ScrollPane scrollPane = new ScrollPane(subpane);
+        scrollPane.setFitToHeight(true); // Make sure it fits the height
+        scrollPane.setFitToWidth(true);  // Make sure it fits the width
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS); // Always show vertical scrollbar
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Do not show horizontal scrollbar
+        pane.add(scrollPane, 0, 2);
 
-        // Zipcode field
-        GridPane zipcodeField =  InputField.inputField("Zipcode");
-        subpane.add(zipcodeField, 0 ,3);
+        // Enter button
+        Node enterButton = new StyledButton1("Enter", e -> {
+            Register.createAccount(
+                this.connection,
+                pane,
+                getInputField(subpane, 0),
+                getInputField(subpane, 1),
+                getInputField(subpane, 2),
+                getInputField(subpane, 3),
+                getInputField(subpane, 4),
+                getInputField(subpane, 5),
+                getInputField(subpane, 6),
+                getInputField(subpane, 7),
+                getInputField(subpane, 8),
+                getInputField(subpane, 9),
+                getInputField(subpane, 10),
+                stage
+            );
+        }).createComponent();
+        enterButton.getStyleClass().add("button-1");
+        pane.add(enterButton, 0, 3);
 
-        // State field
-        GridPane stateField =  InputField.inputField("State");
-        subpane.add(stateField, 0 ,4);
+        return pane;
+    }
 
-        // Username
-        GridPane usernameField = InputField.inputField("Username");
-        subpane.add(usernameField, 0 ,5);
+    private void addInputField(GridPane subpane, String labelText, int row) {
+        GridPane inputField = InputField.inputField(labelText);
+        inputField.getStyleClass().add("text-field-1");
+        subpane.add(inputField, 0, row);
+    }
 
-        // Password
-        GridPane passwordField = InputField.inputField("Password");
-        subpane.add(passwordField, 0 ,6);
-
-        // Email
-        GridPane emailField = InputField.inputField("Email");
-        subpane.add(emailField, 0 ,7);
-
-        // SSN 
-        GridPane ssnField = InputField.inputField("SSN");
-        subpane.add(ssnField, 0 ,8);
-
-        // Security Question
-        GridPane securityQuestion = InputField.inputField("Security Question");
-        subpane.add(securityQuestion, 0 ,9);
-
-        // Security Question
-        GridPane securityAnswer = InputField.inputField("Security Answer");
-        subpane.add(securityAnswer, 0 ,10);
- 
-
-
-        pane.add(new StyledButton1("Enter", e -> {
-            Register.createAccount(this.connection, pane,  firstNameField, lastNameField, addressField, zipcodeField, stateField, usernameField, passwordField, emailField, ssnField, securityQuestion, securityAnswer, stage);
-        }).createComponent(), 0, 5, 2, 1);
-
-
-        return pane; 
-
-
+    private GridPane getInputField(GridPane subpane, int row) {
+        return (GridPane) subpane.getChildren().get(row); // Return the entire GridPane
     }
 }

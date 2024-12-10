@@ -3,6 +3,7 @@ package org.com.animations;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
@@ -45,5 +46,14 @@ public class Animate {
         rotateTransition.setCycleCount(1);
         rotateTransition.setAutoReverse(true);
         rotateTransition.play();
+    }
+
+     public void move(int seconds, double xDistance, double yDistance, int iterations) {
+        TranslateTransition moveTransition = new TranslateTransition(Duration.millis(seconds * 1000), this.node);
+        moveTransition.setByX(xDistance); 
+        moveTransition.setByY(yDistance);
+        moveTransition.setCycleCount(iterations);
+        moveTransition.setAutoReverse(false);
+        moveTransition.play();
     }
 }
