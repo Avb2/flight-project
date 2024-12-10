@@ -1,6 +1,7 @@
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/components/panes/UserInfoPane.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/App.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/components/panes/LookupAdminPane.java
+/Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/components/panes/ModifyFlightPane.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/functionality/flights/ModifyFlightsInterface.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/bases/Screen.java
 /Users/alexbringuel/java-dev/java-flight-project-prototype/flight-project/sample/src/main/java/org/com/screens/landing/SplashScreen.java

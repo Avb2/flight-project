@@ -5,6 +5,7 @@ package org.com.models;
 
 
 public class Flight {
+    public Integer id;
     public String destination;
     public String departureLocation;
     public String capacity;
@@ -23,6 +24,7 @@ public class Flight {
         String flightDate,
         String status
         ){
+            this.id = null;
         this.destination = destination;
         this.departureLocation = departureLocation;
         this.capacity = capacity;
@@ -32,7 +34,30 @@ public class Flight {
         this.status = status;
     }
 
+    public Flight(
+        Integer id,
+        String destination, 
+        String departureLocation, 
+        String capacity, 
+        String takeoffTime,
+        String landingTime,
+        String flightDate,
+        String status
+        ){
+            this.id = id;
+            this.destination = destination;
+            this.departureLocation = departureLocation;
+            this.capacity = capacity;
+            this.takeoffTime = takeoffTime;
+            this.landingTime = landingTime;
+            this.flightDate = flightDate;
+            this.status = status;
+    }
+
     // Getters
+    public Integer getId() {
+        return id;
+    }
     public String getDestination() {
         return destination;
     }

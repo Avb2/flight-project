@@ -28,7 +28,7 @@ public class Login {
             try {
                 // Validate user by username and password
                 Boolean validUser = conn.validateUsername(username, password);
-                System.out.println(validUser);
+
                 // Login user if auth was successful
                 if (validUser == true) {
                     // Create user state
