@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 
+//we will use this class for titles etc.
+
 public class Animate {
     private Node node; 
 
