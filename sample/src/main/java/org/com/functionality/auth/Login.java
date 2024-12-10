@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.com.database.UserDatabase;
-import org.com.screens.home.AdminHomeScreen;
 import org.com.screens.home.HomeScreen;
 import org.com.state.user.UserState;
 
@@ -38,8 +37,11 @@ public class Login {
                     // If the user is an admin
                     if (Login.validateAdmin(connection, username)){
                         System.out.println("admin");
-                        stage.setScene(new AdminHomeScreen(connection, userState).createScreen(stage));
+                        Scene scene = new HomeScreen(connection, userState).createScreen(stage);
+                        // Push to main logged in screen
+                        stage.setScene(scene);
                         stage.show();
+                        
                     } else {
                         System.out.println("User");
                         Scene scene = new HomeScreen(connection, userState).createScreen(stage);

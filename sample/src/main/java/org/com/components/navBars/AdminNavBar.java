@@ -8,10 +8,11 @@ import org.com.components.buttons.LogOutButton;
 import org.com.components.buttons.MainMenuButton;
 import org.com.components.buttons.ManageAdminsBtn;
 import org.com.components.buttons.StyledButton1;
-import org.com.functionality.navigation.PushEditFlight;
+import org.com.screens.flights.ManageFlights;
 import org.com.state.user.UserState;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -39,8 +40,10 @@ public class AdminNavBar extends Component{
 
         pane.add(MainMenuButton.mainMenuButton(this.connection, this.stage, this.userState, this.mainPane), 0, 0);
 
-        pane.add(new StyledButton1("Flights", e -> {new PushEditFlight().push(this.connection, userState, stage);}).createComponent(), 1, 0);
-        
+        pane.add(new StyledButton1("Flights", e -> {Scene scene = new ManageFlights(this.connection, this.userState).createScreen(this.stage);
+            stage.setScene(scene);
+            stage.show();}).createComponent(), 1, 0);
+    
         pane.add(new ManageAdminsBtn(this.connection, this.userState, this.stage).createComponent(), 2, 0);
         
         pane.add(LogOutButton.logOutButton(this.connection, this.stage, this.userState, this.mainPane), 3, 0);

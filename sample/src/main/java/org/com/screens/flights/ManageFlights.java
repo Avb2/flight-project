@@ -11,11 +11,13 @@ import java.util.Map;
 import org.com.bases.Screen;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.cards.FlightCard;
+import org.com.components.navBars.AdminNavBar;
 import org.com.components.navBars.NavBar;
 import org.com.constants.Sizes;
 import org.com.database.BookingDatabase;
 import org.com.database.FlightDatabase;
 import org.com.database.parser.ResultSetParser;
+import org.com.functionality.TimestampHandling;
 import org.com.state.user.UserState;
 
 import javafx.geometry.Insets;
@@ -46,7 +48,10 @@ public class ManageFlights extends Screen{
         pane.setPadding(new Insets(10, 10, 10, 10));
         pane.setAlignment(Pos.TOP_CENTER);
         pane.setVgap(Sizes.largeGap);
-        pane.add(new NavBar(this.connection, stage, this.userState, pane).createComponent(), 0, 0);
+GridPane navbar = userState.getPermissions().matches("admin") 
+        ? (GridPane) new AdminNavBar(stage, this.userState, this.connection, pane).createComponent() 
+        : (GridPane) new NavBar(this.connection, stage, this.userState, pane).createComponent();
+    pane.add(navbar, 0, 0);
     
         Label titleLabel = new Label("Manage Flights");
         titleLabel.getStyleClass().add("title");
@@ -59,11 +64,14 @@ public class ManageFlights extends Screen{
         GridPane subPane = new GridPane();
         scrollPane.setContent(subPane);
     
-        String[] keys = new String[]{"number", "departureLocation", "destination", "status"};
+        String[] keys = new String[]{"number", "departureLocation", "destination", "status", "takeoff", "landing", "date"};
     
         try {
             Map<String, String>[] flightData = new ResultSetParser(new FlightDatabase(this.connection).retrieveFlights()).parseToStringDict(keys);
-    
+            
+            
+
+
             for (int i = 0; i < flightData.length; i++) {
                 if (flightData[i] != null) {
                     GridPane tempPane = new GridPane();
@@ -72,7 +80,10 @@ public class ManageFlights extends Screen{
                         flightData[i].get(keys[0]), 
                         flightData[i].get(keys[1]), 
                         flightData[i].get(keys[2]), 
-                        flightData[i].get(keys[3])
+                        flightData[i].get(keys[3]),
+                        TimestampHandling.formatTimestamp(flightData[i].get(keys[4])),
+                        TimestampHandling.formatTimestamp(flightData[i].get(keys[5])),
+                        flightData[i].get(keys[6])
                     ).createComponent();
                     tempPane.add(flightCard, 0, 0, 1, 2);
     

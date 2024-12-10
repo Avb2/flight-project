@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
 import org.com.database.UserDatabase;
-import org.com.screens.login.LoginScreen;
+import org.com.screens.landing.LoginScreen;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

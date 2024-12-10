@@ -7,8 +7,6 @@ import org.com.animations.Animate;
 import org.com.bases.Screen;
 import org.com.components.buttons.StyledButton1;
 import org.com.constants.Sizes;
-import org.com.screens.login.LoginScreen;
-import org.com.screens.registration.RegisterScreen;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

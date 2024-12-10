@@ -1,4 +1,4 @@
-package org.com.screens.login;
+package org.com.screens.landing;
 
 
 import java.sql.Connection;
@@ -9,7 +9,6 @@ import org.com.components.buttons.StyledButton1;
 import org.com.components.inputFields.InputField;
 import org.com.constants.Sizes;
 import org.com.functionality.auth.Login;
-import org.com.screens.security.ResetPasswordScreen;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

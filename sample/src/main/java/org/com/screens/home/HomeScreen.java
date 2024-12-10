@@ -11,6 +11,7 @@ import org.com.components.navBars.NavBar;
 import org.com.constants.Sizes;
 import org.com.database.BookingDatabase;
 import org.com.database.parser.ResultSetParser;
+import org.com.functionality.TimestampHandling;
 import org.com.state.user.UserState;
 
 import javafx.geometry.Insets;
@@ -78,7 +79,7 @@ public class HomeScreen extends Screen{
         
 
         // Get all flights
-        String[] keys = new String[] {"number","takeoff", "destination", "status"};
+        String[] keys = new String[] {"number", "departureLocation", "destination", "status", "takeoff", "landing", "date"};
 
     
         try{
@@ -89,8 +90,15 @@ public class HomeScreen extends Screen{
             if (flightData[i] != null) {
                 final int index = i;
                 GridPane tempPane = new GridPane();
-                Node flightCard = new FlightCard(flightData[i].get(keys[0]), flightData[i].get(keys[1]), flightData[i].get(keys[2]), flightData[i].get(keys[3])).createComponent();
-                tempPane.add(flightCard, 0, 0, 1, 2);
+                Node flightCard = new FlightCard(
+                    flightData[i].get(keys[0]), 
+                    flightData[i].get(keys[1]), 
+                    flightData[i].get(keys[2]), 
+                    flightData[i].get(keys[3]),
+                    TimestampHandling.formatTimestamp(flightData[i].get(keys[4])),
+                    TimestampHandling.formatTimestamp(flightData[i].get(keys[5])),
+                    flightData[i].get(keys[6])
+                ).createComponent();tempPane.add(flightCard, 0, 0, 1, 2);
 
             
                 

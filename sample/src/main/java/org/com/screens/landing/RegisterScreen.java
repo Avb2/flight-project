@@ -1,4 +1,4 @@
-package org.com.screens.registration;
+package org.com.screens.landing;
 
 import java.sql.Connection;
 
