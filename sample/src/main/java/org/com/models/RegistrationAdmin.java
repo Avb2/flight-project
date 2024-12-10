@@ -2,8 +2,6 @@ package org.com.models;
 
 
 
-import java.sql.Connection;
-
 import org.com.bases.Models;
 
 import javafx.scene.control.TextField;
@@ -66,22 +64,23 @@ public class RegistrationAdmin extends Models{
 
     public Object[] toArray(boolean register){
         if (register){
-            String username = "admin_"+ this.ssn.substring(6);
+            String username = "admin_"+ this.ssn.substring(4);
             return new Object[] {this.firstName, this.lastName, username, this.ssn, this.email, this.ssn, "What is your SSN?", this.ssn, "admin"};
         } else {
             return this.toArray();
         }
        
+    
     }
 
 
-    //TODO add logic to create username for admins
-    public String generateAdminUsername(Connection connection){
-        return "";
+    public String getSSN() {
+        return this.ssn;
+
     }
-    //TODO add logic to create password for admins
-    public String generateAdminPassword(Connection connection){
-        return "";
+
+    public String getPassword(){
+        return this.ssn;
     }
 
 }

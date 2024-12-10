@@ -43,7 +43,7 @@ public class LookupAdminPane extends Panes{
         titleLabel.getStyleClass().add("subtitle");
         pane.add(titleLabel, 0, 1);
 
-        GridPane lookupField = InputField.inputField("Username or SSN");
+        GridPane lookupField = InputField.inputField("Username");
         pane.add(lookupField, 0, 2);
         // Fading error label
         // 

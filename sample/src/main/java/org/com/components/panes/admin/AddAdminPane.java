@@ -75,6 +75,27 @@ public class AddAdminPane extends Panes {
                 Label successLabel = new Label("Successfully created");
                 pane.add(successLabel, 0, 6);
                 new Animate(successLabel).fadeOut(1);
+
+
+                GridPane infopane = new GridPane();
+
+                Label usernameLabelI = new Label("Username: ");
+                infopane.add(usernameLabelI, 0, 0);
+        
+                Label usernameLabelD = new Label("admin_"+ registrationModel.getSSN().substring(4));
+                infopane.add(usernameLabelD, 1, 0);
+        
+                Label passwordLabelI = new Label("Password: ");
+                infopane.add(passwordLabelI, 0, 1);
+                Label passwordLabelD = new Label(registrationModel.getSSN());
+                infopane.add(passwordLabelD, 1, 1);
+
+
+                pane.add(infopane, 0, 10, 2, 2);
+                new Animate(infopane).fadeOut(10);
+
+
+
             } else {
                 Label failureLabel = new Label("Failed to create");
                 pane.add(failureLabel, 0, 6);
@@ -82,5 +103,10 @@ public class AddAdminPane extends Panes {
                 System.out.println("Failed to create admin");
             }
         }).createComponent(), 0, 7);
+    
+       
     }
 }
+
+
+
