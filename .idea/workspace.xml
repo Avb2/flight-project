@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8f501844-6bc3-43b4-959a-b0349e572c99" name="Changes" comment="Added functionality for DeleteFlight and navigation to the Edit Admin screen, created some files to organize project tasks">
+      <change beforePath="$PROJECT_DIR$/sample/target/classes/org/com/screens/modify/EditAdminScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/sample/target/classes/org/com/screens/modify/EditAdminScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/sample/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;CamiloBenitoJose&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Avb2/flight-project.git&quot;,
+    &quot;accountId&quot;: &quot;bdaa2103-2350-42f4-adfe-85fe4503d1d0&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2pOuoAVY7pyUl8xYlTkgiQIf3rw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.App (1).executor": "Run",
+    "Application.App (2).executor": "Debug",
+    "Application.App.executor": "Run",
+    "Maven.sample [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor": "Run",
+    "Maven.sample [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.508046",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="App (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.com.App" />
+      <module name="sample" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.com.App" />
+      <module name="sample" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="homebrew-23" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="org.com.App" />
+      <module name="sample" />
+      <option name="PROGRAM_PARAMETERS" value="--module-path /Downloads/javafx-sdk-23.0.1/JavaFX/lib --add-modules=javafx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.com.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="flight-project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="flight-project" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.App (1)" />
+      <item itemvalue="Application.App (2)" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+        <item itemvalue="Application.App (2)" />
+        <item itemvalue="Application.App (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8f501844-6bc3-43b4-959a-b0349e572c99" name="Changes" comment="" />
+      <created>1732649614878</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732649614878</updated>
+      <workItem from="1732649615963" duration="4112000" />
+      <workItem from="1732659601396" duration="160000" />
+      <workItem from="1732662043017" duration="154000" />
+      <workItem from="1732662304019" duration="872000" />
+      <workItem from="1732663184865" duration="235000" />
+      <workItem from="1732663426353" duration="486000" />
+      <workItem from="1732664185017" duration="610000" />
+      <workItem from="1732668170062" duration="598000" />
+      <workItem from="1732669232525" duration="602000" />
+      <workItem from="1733552223646" duration="15461000" />
+      <workItem from="1733712897013" duration="2708000" />
+      <workItem from="1733864038217" duration="263000" />
+      <workItem from="1733864304105" duration="924000" />
+      <workItem from="1733867079854" duration="4618000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added the EditFlightsBtn so the button can be used across the application">
+      <option name="closed" value="true" />
+      <created>1733554451515</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733554451515</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added the EnterBtn class UI class for usability throughout the app">
+      <option name="closed" value="true" />
+      <created>1733556487745</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733556487745</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added the SplashScreen class as well as the LogOutBtn class">
+      <option name="closed" value="true" />
+      <created>1733702547018</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733702547018</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added a CreateFlightsInterface as well as the Flight class">
+      <option name="closed" value="true" />
+      <created>1733703649563</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733703649563</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added a CreateFlightsInterface as well as the Flight class">
+      <option name="closed" value="true" />
+      <created>1733712827751</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733712827751</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Created functionality interfaces for uses across the app, will help with User Interface.">
+      <option name="closed" value="true" />
+      <created>1733715876286</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1733715876286</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added functionality for DeleteFlight and navigation to the Edit Admin screen, created some files to organize project tasks">
+      <option name="closed" value="true" />
+      <created>1733716780962</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733716780962</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added the EditFlightsBtn so the button can be used across the application" />
+    <MESSAGE value="Added the EnterBtn class UI class for usability throughout the app" />
+    <MESSAGE value="Added the SplashScreen class as well as the LogOutBtn class" />
+    <MESSAGE value="Added a CreateFlightsInterface as well as the Flight class" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;sample/src/main/java/org/com/animations/Animate.java&#10;#&#9;sample/src/main/java/org/com/components/buttons/StyledButton1.java&#10;#&#9;sample/src/main/java/org/com/models/Flight.java&#10;#&#9;sample/src/main/java/org/com/screens/landing/SplashScreen.java&#10;#&#9;sample/target/classes/org/com/App.class&#10;#&#9;sample/target/classes/org/com/components/buttons/BackButton.class&#10;#&#9;sample/target/classes/org/com/components/buttons/StyledButton1.class&#10;#&#9;sample/target/classes/org/com/components/cards/FlightCard.class&#10;#&#9;sample/target/classes/org/com/components/navBars/AdminNavBar.class&#10;#&#9;sample/target/classes/org/com/components/navBars/NavBar.class&#10;#&#9;sample/target/classes/org/com/screens/flights/ManageFlights.class&#10;#&#9;sample/target/classes/org/com/screens/home/AdminHomeScreen.class&#10;#&#9;sample/target/classes/org/com/screens/home/AuthenticatedUserHomeScreen.class&#10;#&#9;sample/target/classes/org/com/screens/landing/SplashScreen.class&#10;#&#9;sample/target/classes/org/com/screens/modify/EditAdminScreen.class" />
+    <MESSAGE value="Created functionality interfaces for uses across the app, will help with User Interface." />
+    <MESSAGE value="Added functionality for DeleteFlight and navigation to the Edit Admin screen, created some files to organize project tasks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functionality for DeleteFlight and navigation to the Edit Admin screen, created some files to organize project tasks" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
