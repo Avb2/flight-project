@@ -106,14 +106,20 @@ public GridPane createPane(Stage stage) {
                         ResultSet selectedFlight = flightDb.retrieveFlight(flightNumber);
                         ResultSetParser selectedFlightRP = new ResultSetParser(selectedFlight);
                         Map<String, Object>[] selectedFlightDict = selectedFlightRP.parse(
-                            new String[]{"takeoff", "landing"}, 
-                            new Class<?>[]{Timestamp.class, Timestamp.class}
+                            new String[]{"takeoff", "landing", "status"}, 
+                            new Class<?>[]{Timestamp.class, Timestamp.class, String.class}
                         );
+
+                        
                         Map<String, Object> selectedFlightData = selectedFlightDict[0];
                         Timestamp selectedTakeoff = (Timestamp) selectedFlightData.get("takeoff");
                         Timestamp selectedLanding = (Timestamp) selectedFlightData.get("landing");
+                        String status = String.valueOf(selectedFlightData.get("status"));
 
-                        ResultSet bookedTimes = bookingDb.retrieveTimes(flightNumber);
+                        if (status.matches("Booked")){
+
+                        } else {
+                            ResultSet bookedTimes = bookingDb.retrieveTimes(flightNumber);
                         ResultSetParser bookedTimesRP = new ResultSetParser(bookedTimes);
                         Map<String, Object>[] bookedTimesDict = bookedTimesRP.parse(
                             new String[]{"takeoff", "landing"}, 
@@ -134,12 +140,15 @@ public GridPane createPane(Stage stage) {
                             }
                         }
 
-                        if (!conflict) {
+                        if (!conflict ) {
                             bookingDb.createBooking(this.userState.getUid(), flightNumber);
                             System.out.println("Added flight");
                         } else {
                             System.out.println("Time Conflict!");
                         }
+                        }
+
+                        
                     } catch (SQLException se) {
                         se.printStackTrace();
                     }
