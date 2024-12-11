@@ -23,7 +23,6 @@
     -fx-border-radius: 5;
     -fx-padding:  12;             
     -fx-font-size: 14px;
-    -fx-margin: 10
 }
 
 .button-1:hover {
@@ -67,8 +66,8 @@
 }
 
 .text-field-1:focused {
-    -fx-border-color: #5c8bf5;     /* Soft blue on focus */
-    -fx-background-color: #ffffff; /* White background when focused */
+    -fx-border-color: #5c8bf5;     
+    -fx-background-color: #ffffff;
 }
 
 
@@ -96,8 +95,10 @@
 }
 
 .navbar-primary .menu-item:hover {
-    -fx-background-color: #476cb1; /* Slightly darker on hover */
+    -fx-background-color: #476cb1; 
 }
+
+
 
 
 .flight-card-pane {

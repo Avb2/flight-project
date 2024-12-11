@@ -15,6 +15,63 @@ public class FlightDatabase extends Database {
         super(connection);
     }
 
+
+    // By times
+    public ResultSet findFlightsByTakeoffTime(Timestamp time, boolean isBefore) throws SQLException {
+        String query = isBefore ? 
+            "SELECT * FROM Flights WHERE takeoff < ?" : 
+            "SELECT * FROM Flights WHERE takeoff > ?";
+        return super.query(query, new Object[] {time}, new Object[] {Timestamp.class});
+    }
+    
+    public ResultSet findFlightsByLandingTime(Timestamp time, boolean isBefore) throws SQLException {
+        String query = isBefore ? 
+            "SELECT * FROM Flights WHERE landing < ?" : 
+            "SELECT * FROM Flights WHERE landing > ?";
+        return super.query(query, new Object[] {time}, new Object[] {Timestamp.class});
+    }
+
+
+
+   // Capacity
+    public ResultSet findFlightsByCapacity(int capacity, boolean isGreaterThan) throws SQLException {
+        String query = isGreaterThan ? 
+            "SELECT * FROM Flights WHERE currentCapacity > ?" : 
+            "SELECT * FROM Flights WHERE currentCapacity < ?";
+        return super.query(query, new Object[] {capacity}, new Object[] {Integer.class});
+    }
+
+
+
+    // Destination
+    public ResultSet findFlightsByDestination(String destination) throws SQLException {
+        String query = "SELECT * FROM Flights WHERE destination LIKE ?";
+        return super.query(query, new Object[] {"%" + destination + "%"}, new Object[] {String.class});
+    }
+
+    
+
+    // departure location
+    public ResultSet findFlightsByDepartureLocation(String departureLocation) throws SQLException {
+        String query = "SELECT * FROM Flights WHERE departureLocation LIKE ?";
+        return super.query(query, new Object[] {"%" + departureLocation + "%"}, new Object[] {String.class});
+    }
+
+
+    public ResultSet findFlightsByDate(Date date, boolean isBefore) throws SQLException {
+        String query = isBefore ? 
+            "SELECT * FROM Flights WHERE date < ?" : 
+            "SELECT * FROM Flights WHERE date > ?";
+        return super.query(query, new Object[] {date}, new Object[] {Date.class});
+    }
+    
+    
+
+
+
+
+
+
     public ResultSet retrieveFlights() throws SQLException{
         return super.query("SELECT * FROM Flights");
     }
